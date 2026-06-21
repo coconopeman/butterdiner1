@@ -15,19 +15,14 @@
             box-shadow: none !important;
             text-shadow: none !important;
         }
-        .retro-heading {
-            font-family: 'Black Han Sans', sans-serif !important;
-            letter-spacing: -0.04em;
-        }
+        .retro-heading { font-family: 'Black Han Sans', sans-serif !important; letter-spacing: -0.04em; }
         .checker-bg {
             background-color: #962d27;
             background-image: repeating-conic-gradient(#962d27 0% 25%, #fcfaee 0% 50%);
             background-size: 48px 48px;
             border-radius: 0px !important;
         }
-        .diner-border {
-            border: 2px solid #962d27 !important;
-        }
+        .diner-border { border: 2px solid #962d27 !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .receipt-tear {
@@ -39,43 +34,20 @@
         #step-1, #step-2, #step-3, .border-b, .border-b-2 { border-radius: 0px !important; }
         #barcode-graphic div { border-radius: 0px !important; }
         .bubble-btn {
-            position: relative;
-            background-color: #edb12f;
-            border: 2px solid #962d27 !important;
-            color: #962d27 !important;
-            padding: 4px 14px;
-            font-family: 'Black Han Sans', sans-serif !important;
-            font-size: 13px;
-            border-radius: 8px !important;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            transition: background-color 0.15s;
+            position: relative; background-color: #edb12f; border: 2px solid #962d27 !important;
+            color: #962d27 !important; padding: 4px 14px; font-family: 'Black Han Sans', sans-serif !important;
+            font-size: 13px; border-radius: 8px !important; display: inline-flex; align-items: center;
+            justify-content: center; line-height: 1; transition: background-color 0.15s; cursor: pointer;
         }
         .bubble-btn::before {
-            content: '';
-            position: absolute;
-            left: -8px;
-            top: 50%;
-            transform: translateY(-50%);
-            border-width: 5px 8px 5px 0;
-            border-style: solid;
-            border-color: transparent #962d27 transparent transparent;
-            display: block;
-            width: 0;
+            content: ''; position: absolute; left: -8px; top: 50%; transform: translateY(-50%);
+            border-width: 5px 8px 5px 0; border-style: solid;
+            border-color: transparent #962d27 transparent transparent; display: block; width: 0;
         }
         .bubble-btn::after {
-            content: '';
-            position: absolute;
-            left: -5px;
-            top: 50%;
-            transform: translateY(-50%);
-            border-width: 4px 6px 4px 0;
-            border-style: solid;
-            border-color: transparent #edb12f transparent transparent;
-            display: block;
-            width: 0;
+            content: ''; position: absolute; left: -5px; top: 50%; transform: translateY(-50%);
+            border-width: 4px 6px 4px 0; border-style: solid;
+            border-color: transparent #edb12f transparent transparent; display: block; width: 0;
         }
         .bubble-btn:hover:not(:disabled) { background-color: #fff04a; }
         .bubble-btn:hover:not(:disabled)::after { border-color: transparent #fff04a transparent transparent; }
@@ -85,20 +57,36 @@
             100% { transform: translateY(0); opacity: 1; }
         }
         .layer-drop { animation: drop-down 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards; }
-        /* Force visibility in capture target */
-        #capture-target .layer-drop,
-        #capture-target img {
-            animation: none !important;
-            opacity: 1 !important;
-            transform: none !important;
+        #capture-target .layer-drop, #capture-target img {
+            animation: none !important; opacity: 1 !important; transform: none !important;
         }
-        /* Menu card images */
-        .menu-card-img {
-            display: block;
-            margin: 0 auto;
-            object-fit: contain;
-            image-rendering: auto;
+        .menu-card-img { display: block; margin: 0 auto; object-fit: contain; }
+
+        /* ── Save Popup Modal ── */
+        .save-modal-overlay {
+            display: none; position: fixed; inset: 0; z-index: 9999;
+            background: rgba(28, 19, 17, 0.75); align-items: center; justify-content: center;
         }
+        .save-modal-overlay.show { display: flex; }
+        .save-modal {
+            background: #fcfaee; border: 3px solid #962d27; border-radius: 16px !important;
+            padding: 28px; max-width: 560px; width: 90%; max-height: 90vh;
+            display: flex; flex-direction: column; align-items: center; gap: 16px;
+            overflow-y: auto;
+        }
+        .save-modal h3 {
+            font-family: 'Black Han Sans', sans-serif !important;
+            font-size: 22px; color: #962d27; text-align: center;
+        }
+        .save-modal .preview-img {
+            width: 100%; border: 2px solid #962d27; border-radius: 8px !important;
+        }
+        .save-modal .confirm-btn {
+            background: #962d27; color: #fcfaee; border: none; padding: 12px 40px;
+            font-family: 'Black Han Sans', sans-serif !important; font-size: 16px;
+            border-radius: 8px !important; cursor: pointer; transition: opacity 0.15s;
+        }
+        .save-modal .confirm-btn:hover { opacity: 0.85; }
     </style>
 </head>
 <body class="bg-[#fcfaee] text-[#1c1311] min-h-screen flex flex-col selection:bg-[#fff04a] overflow-x-hidden">
@@ -108,17 +96,11 @@
     <header class="bg-[#fcfaee] border-b-2 border-[#1c1311] py-5 px-4">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
             <div>
-                <h1 class="text-4xl md:text-5xl uppercase font-bold tracking-tight text-[#962d27] retro-heading">
-                    BUTTER DINER . 1
-                </h1>
-                <p class="text-xs font-mono tracking-widest text-[#4a6635] uppercase mt-0.5">
-                    Freshly Stacked Kitten-Themed Gourmet Burgers / Est. 1950
-                </p>
+                <h1 class="text-4xl md:text-5xl uppercase font-bold tracking-tight text-[#962d27] retro-heading">BUTTER DINER . 1</h1>
+                <p class="text-xs font-mono tracking-widest text-[#4a6635] uppercase mt-0.5">Freshly Stacked Kitten-Themed Gourmet Burgers / Est. 1950</p>
             </div>
             <div>
-                <div class="diner-border px-4 py-2 bg-[#1c1311] text-[#fff04a] text-xs font-mono select-none tracking-widest rounded-xl">
-                    버터다이너의 첫번째 요리.
-                </div>
+                <div class="diner-border px-4 py-2 bg-[#1c1311] text-[#fff04a] text-xs font-mono select-none tracking-widest rounded-xl">버터다이너의 첫번째 요리.</div>
             </div>
         </div>
     </header>
@@ -127,11 +109,8 @@
         
         <!-- LEFT COLUMN -->
         <section class="lg:col-span-6 flex flex-col gap-5">
-            
             <div class="bg-[#fef9c3] p-5 relative overflow-hidden" style="border: 2px solid #962d27 !important;">
-                <h3 class="text-3xl retro-heading text-[#962d27] border-b border-dashed border-[#962d27] pb-2 mb-3" style="border-radius: 0px !important;">
-                    버터버거 조리 수칙
-                </h3>
+                <h3 class="text-3xl retro-heading text-[#962d27] border-b border-dashed border-[#962d27] pb-2 mb-3" style="border-radius: 0px !important;">버터버거 조리 수칙</h3>
                 <ul class="text-xs font-sans font-medium space-y-2 text-stone-800 leading-relaxed list-disc list-inside">
                     <li>언더번이 선택 후 다른 재료를 쌓을 수 있습니다.</li>
                     <li>언더번 바로 위에는 치즈와 양상추를 올릴 수 없습니다.</li>
@@ -141,7 +120,6 @@
                     <li>헤드번을 올리면 조리가 마감되며 이미지 저장버튼이 활성화됩니다.</li>
                 </ul>
             </div>
-
             <div class="w-full flex-grow flex flex-col">
                 <div class="w-full h-full bg-[#fcfaf2] diner-border rounded-xl p-6 flex flex-col justify-center items-center relative select-none overflow-hidden" style="border: 2px solid #962d27 !important;">
                     <div id="burger-renderer" class="flex flex-col items-center justify-end w-full h-[360px] relative z-10 overflow-y-auto no-scrollbar">
@@ -152,12 +130,10 @@
                     </div>
                 </div>
             </div>
-
         </section>
 
         <!-- RIGHT COLUMN -->
         <section class="lg:col-span-6 flex flex-col gap-5">
-            
             <div class="bg-white diner-border rounded-xl p-3.5 flex justify-between text-base select-none" style="border-color: #962d27 !important;">
                 <span id="step-1" class="text-[#962d27] pb-1 retro-heading" style="font-size: 28px !important;">1. 언더번 선택</span>
                 <span id="step-2" class="text-stone-400 pb-1 retro-heading" style="font-size: 28px !important;">2. 속재료 선택</span>
@@ -165,16 +141,14 @@
             </div>
 
             <div id="diner-alert" class="hidden bg-[#962d27] diner-border rounded-xl p-4 text-white text-sm font-mono tracking-wide">
-                <span class="font-bold">⚠️ 조리 규칙 위반:</span> <span id="alert-text">규칙 내용</span>
+                <span class="font-bold">⚠️ 조리 규칙 위반:</span> <span id="alert-text"></span>
             </div>
 
             <div class="relative bg-[#962d27] diner-border rounded-2xl p-6 select-none flex flex-col min-h-[620px]">
-                
                 <div class="bg-white flex-1 p-5 relative flex flex-col gap-4 overflow-hidden rounded-md" style="border-radius: 4px !important;">
-                    
                     <div class="flex-1 overflow-y-auto no-scrollbar space-y-6 text-stone-800 pr-1">
                         
-                        <!-- STAGE 1: Under Bun -->
+                        <!-- STAGE 1 -->
                         <div id="stage-1-panel" class="stage-pane space-y-3">
                             <div class="flex justify-between items-center border-b border-stone-100 pb-1.5" style="border-radius: 0px !important;">
                                 <span class="bg-[#edb12f]/30 text-[#962d27] font-mono text-xs px-2 py-0.5 rounded-md font-bold uppercase tracking-widest">start</span>
@@ -183,214 +157,124 @@
                                 </span>
                             </div>
                             <div class="grid grid-cols-2 gap-2">
-                                <button onclick="selectBottomBun('long_tail', '긴꼬리')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
-                                    <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <img src="https://i.imgur.com/HBelkZR.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
-                                        <span class="text-[#1c1311]">긴꼬리</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
-                                    </div>
+                                <button onclick="selectBottomBun('long_tail','긴꼬리')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                    <div class="w-full h-12 flex justify-center items-center mb-1"><img src="https://i.imgur.com/HBelkZR.png" class="menu-card-img" style="height:48px" crossorigin="anonymous"></div>
+                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">긴꼬리</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
-                                <button onclick="selectBottomBun('round_tail', '동글꼬리')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
-                                    <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <img src="https://i.imgur.com/HSxLgXX.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
-                                        <span class="text-[#1c1311]">동글꼬리</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
-                                    </div>
+                                <button onclick="selectBottomBun('round_tail','동글꼬리')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                    <div class="w-full h-12 flex justify-center items-center mb-1"><img src="https://i.imgur.com/HSxLgXX.png" class="menu-card-img" style="height:48px" crossorigin="anonymous"></div>
+                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">동글꼬리</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
-                                <button onclick="selectBottomBun('chubby_tail', '통통꼬리')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
-                                    <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <img src="https://i.imgur.com/I8UHHBa.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
-                                        <span class="text-[#1c1311]">통통꼬리</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
-                                    </div>
+                                <button onclick="selectBottomBun('chubby_tail','통통꼬리')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                    <div class="w-full h-12 flex justify-center items-center mb-1"><img src="https://i.imgur.com/I8UHHBa.png" class="menu-card-img" style="height:48px" crossorigin="anonymous"></div>
+                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">통통꼬리</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
-                                <button onclick="selectBottomBun('fluffy_tail', '복실꼬리')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
-                                    <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <img src="https://i.imgur.com/F1z2F7a.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
-                                        <span class="text-[#1c1311]">복실꼬리</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
-                                    </div>
+                                <button onclick="selectBottomBun('fluffy_tail','복실꼬리')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                    <div class="w-full h-12 flex justify-center items-center mb-1"><img src="https://i.imgur.com/F1z2F7a.png" class="menu-card-img" style="height:48px" crossorigin="anonymous"></div>
+                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">복실꼬리</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
                             </div>
                         </div>
 
-                        <!-- STAGE 2: Fillings -->
+                        <!-- STAGE 2: Fillings (6 buttons: tomato, lettuce, chicken, meat, cheeseA, cheeseB) -->
                         <div id="stage-2-panel" class="stage-pane space-y-3 opacity-50 pointer-events-none transition-opacity duration-300">
-                            <div class="flex justify-between items-center border-b border-stone-100 pb-1.5" style="border-radius: 0px !important;">
+                            <div class="flex justify-between items-center border-b border-stone-100 pb-1.5" style="border-radius:0!important;">
                                 <span class="bg-[#edb12f]/30 text-[#962d27] font-mono text-xs px-2 py-0.5 rounded-md font-bold uppercase tracking-widest">inside</span>
-                                <span>
-                                    <button id="stage-2-next" onclick="setStage(3)" disabled class="bubble-btn disabled:opacity-50 disabled:cursor-not-allowed">NEXT</button>
-                                </span>
+                                <span><button id="stage-2-next" onclick="setStage(3)" disabled class="bubble-btn disabled:opacity-50 disabled:cursor-not-allowed">NEXT</button></span>
                             </div>
-                            <div class="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
-                                <button onclick="addFilling('tomato', '토마토')" class="bg-[#962d27] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
-                                    <div class="flex-grow flex items-center justify-center">
-                                        <img src="https://i.imgur.com/ddFlR8Z.png" class="menu-card-img" style="height:20px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius: 0px !important; font-size: 11px;">
-                                        토마토<br><span class="font-mono text-[9px] opacity-80">1,000₩</span>
-                                    </div>
+                            <div class="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
+                                <button onclick="addFilling('tomato','토마토')" class="bg-[#962d27] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/ddFlR8Z.png" class="menu-card-img" style="height:20px" crossorigin="anonymous"></div>
+                                    <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">토마토<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
-                                <button onclick="addFilling('lettuce', '양상추')" class="bg-[#4a6635] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
-                                    <div class="flex-grow flex items-center justify-center">
-                                        <img src="https://i.imgur.com/ZFU2ml3.png" class="menu-card-img" style="height:20px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius: 0px !important; font-size: 11px;">
-                                        양상추<br><span class="font-mono text-[9px] opacity-80">1,000₩</span>
-                                    </div>
+                                <button onclick="addFilling('lettuce','양상추')" class="bg-[#4a6635] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/ZFU2ml3.png" class="menu-card-img" style="height:20px" crossorigin="anonymous"></div>
+                                    <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">양상추<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
-                                <button onclick="addFilling('chicken', '치킨')" class="bg-[#edb12f] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
-                                    <div class="flex-grow flex items-center justify-center">
-                                        <img src="https://i.imgur.com/Nx9MEXN.png" class="menu-card-img" style="height:24px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius: 0px !important; font-size: 11px;">
-                                        치킨<br><span class="font-mono text-[9px] opacity-80">1,000₩</span>
-                                    </div>
+                                <button onclick="addFilling('chicken','치킨')" class="bg-[#edb12f] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/Nx9MEXN.png" class="menu-card-img" style="height:24px" crossorigin="anonymous"></div>
+                                    <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">치킨<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
-                                <button onclick="addFilling('meat', '고기')" class="bg-[#802f06] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
-                                    <div class="flex-grow flex items-center justify-center">
-                                        <img src="https://i.imgur.com/URvIP1B.png" class="menu-card-img" style="height:24px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius: 0px !important; font-size: 11px;">
-                                        고기<br><span class="font-mono text-[9px] opacity-80">1,000₩</span>
-                                    </div>
+                                <button onclick="addFilling('meat','고기')" class="bg-[#802f06] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/URvIP1B.png" class="menu-card-img" style="height:24px" crossorigin="anonymous"></div>
+                                    <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">고기<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
-                                <button onclick="addFilling('cheese', '치즈')" class="bg-[#fff04a] text-[#1c1311] py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
-                                    <div class="flex-grow flex items-center justify-center">
-                                        <img src="https://i.imgur.com/pb9wwLH.png" class="menu-card-img" style="height:18px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius: 0px !important; font-size: 11px;">
-                                        치즈<br><span class="font-mono text-[9px] opacity-80">1,000₩</span>
-                                    </div>
+                                <button onclick="addFilling('cheese_a','치즈A')" class="bg-[#fff04a] text-[#1c1311] py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/pb9wwLH.png" class="menu-card-img" style="height:18px" crossorigin="anonymous"></div>
+                                    <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">치즈A<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
+                                </button>
+                                <button onclick="addFilling('cheese_b','치즈B')" class="bg-[#fff04a] text-[#1c1311] py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/zBfkZn8.png" class="menu-card-img" style="height:18px" crossorigin="anonymous"></div>
+                                    <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">치즈B<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
                             </div>
                         </div>
 
-                        <!-- STAGE 3: Top Bun -->
+                        <!-- STAGE 3 -->
                         <div id="stage-3-panel" class="stage-pane space-y-3 opacity-50 pointer-events-none transition-opacity duration-300">
-                            <div class="border-b border-stone-100 pb-1.5" style="border-radius: 0px !important;">
+                            <div class="border-b border-stone-100 pb-1.5" style="border-radius:0!important;">
                                 <span class="bg-[#edb12f]/30 text-[#962d27] font-mono text-xs px-2 py-0.5 rounded-md font-bold uppercase tracking-widest">final</span>
                             </div>
                             <div class="grid grid-cols-2 gap-2">
-                                <button onclick="selectTopBun('pointy_ears', '뾰족귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
-                                    <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <img src="https://i.imgur.com/8Rmt7k5.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
-                                        <span class="text-[#1c1311]">뾰족귀</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
-                                    </div>
+                                <button onclick="selectTopBun('pointy_ears','뾰족귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                    <div class="w-full h-12 flex justify-center items-center mb-1"><img src="https://i.imgur.com/8Rmt7k5.png" class="menu-card-img" style="height:48px" crossorigin="anonymous"></div>
+                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">뾰족귀</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
-                                <button onclick="selectTopBun('round_ears', '둥근귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
-                                    <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <img src="https://i.imgur.com/SLxtW2c.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
-                                        <span class="text-[#1c1311]">둥근귀</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
-                                    </div>
+                                <button onclick="selectTopBun('round_ears','둥근귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                    <div class="w-full h-12 flex justify-center items-center mb-1"><img src="https://i.imgur.com/SLxtW2c.png" class="menu-card-img" style="height:48px" crossorigin="anonymous"></div>
+                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">둥근귀</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
-                                <button onclick="selectTopBun('long_ears', '길쭉귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
-                                    <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <img src="https://i.imgur.com/iMA0xGj.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
-                                        <span class="text-[#1c1311]">길쭉귀</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
-                                    </div>
+                                <button onclick="selectTopBun('long_ears','길쭉귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                    <div class="w-full h-12 flex justify-center items-center mb-1"><img src="https://i.imgur.com/iMA0xGj.png" class="menu-card-img" style="height:48px" crossorigin="anonymous"></div>
+                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">길쭉귀</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
-                                <button onclick="selectTopBun('folded_ears', '접힌귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
-                                    <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <img src="https://i.imgur.com/pnJ2Hdf.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
-                                    </div>
-                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
-                                        <span class="text-[#1c1311]">접힌귀</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
-                                    </div>
+                                <button onclick="selectTopBun('folded_ears','접힌귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                    <div class="w-full h-12 flex justify-center items-center mb-1"><img src="https://i.imgur.com/pnJ2Hdf.png" class="menu-card-img" style="height:48px" crossorigin="anonymous"></div>
+                                    <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">접힌귀</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
                             </div>
                         </div>
 
-                        <!-- STAGE 4 PANEL -->
+                        <!-- STAGE 4 -->
                         <div id="stage-4-panel" class="stage-pane space-y-3 text-center py-4" style="display: none;">
-                            <p class="text-2xl retro-heading text-[#962d27] uppercase tracking-wider">
-                                버터버거 주문서 작성 완료!
-                            </p>
-                            <p class="text-sm font-mono text-stone-600 leading-relaxed px-2">
-                                오본 플레이트의 완성된 햄버거가 영수증과 함께 주문서 이미지 카드로 저장될 준비를 마쳤습니다.
-                            </p>
+                            <p class="text-2xl retro-heading text-[#962d27] uppercase tracking-wider">버터버거 주문서 작성 완료!</p>
+                            <p class="text-sm font-mono text-stone-600 leading-relaxed px-2">오본 플레이트의 완성된 햄버거가 영수증과 함께 주문서 이미지 카드로 저장될 준비를 마쳤습니다.</p>
                             <div class="flex flex-col sm:flex-row gap-3 pt-4">
-                                <button id="modify-btn" onclick="modifyBurger()" class="flex-1 diner-border bg-[#edb12f] text-white font-bold p-3 transition-colors hover:opacity-90">
-                                    수정하기
-                                </button>
-                                <button id="screenshot-btn" onclick="captureAndSave()" class="flex-1 diner-border bg-[#4a6635] text-white font-bold p-3 transition-colors hover:opacity-90">
-                                    주문서 저장
-                                </button>
+                                <button id="modify-btn" onclick="modifyBurger()" class="flex-1 diner-border bg-[#edb12f] text-white font-bold p-3 transition-colors hover:opacity-90">수정하기</button>
+                                <button id="screenshot-btn" onclick="captureAndSave()" class="flex-1 diner-border bg-[#4a6635] text-white font-bold p-3 transition-colors hover:opacity-90">주문서 저장</button>
                             </div>
                         </div>
 
                     </div>
-
                 </div>
 
                 <div class="pt-3 flex gap-2">
-                    <button id="global-undo" onclick="undoLastStep()" disabled class="flex-1 bg-[#edb12f] text-white font-bold p-2.5 text-sm uppercase tracking-wider rounded-xl disabled:opacity-40 disabled:cursor-not-allowed" style="border: 1px solid #ffffff !important;">
-                        되돌리기
-                    </button>
-                    <button id="global-reset" onclick="resetDinerBurger()" class="flex-1 bg-[#1c1311] text-white font-bold p-2.5 text-sm uppercase tracking-wider rounded-xl" style="border: 1px solid #ffffff !important;">
-                        주문 초기화
-                    </button>
+                    <button id="global-undo" onclick="undoLastStep()" disabled class="flex-1 bg-[#edb12f] text-white font-bold p-2.5 text-sm uppercase tracking-wider rounded-xl disabled:opacity-40 disabled:cursor-not-allowed" style="border: 1px solid #ffffff !important;">되돌리기</button>
+                    <button id="global-reset" onclick="resetDinerBurger()" class="flex-1 bg-[#1c1311] text-white font-bold p-2.5 text-sm uppercase tracking-wider rounded-xl" style="border: 1px solid #ffffff !important;">주문 초기화</button>
                 </div>
-
             </div>
-
         </section>
-
     </main>
 
     <!-- OFFSCREEN CAPTURE -->
-    <div id="capture-target" class="absolute bg-[#fcfaee] p-8 diner-border flex flex-col items-center" style="left: -9999px; top: -9999px; width: 720px; display: none; border-radius: 0px !important; border: 2px solid #962d27 !important;">
+    <div id="capture-target" class="absolute bg-[#fcfaee] p-8 diner-border flex flex-col items-center" style="left:-9999px;top:-9999px;width:720px;display:none;border-radius:0!important;border:2px solid #962d27!important;">
         <div class="text-center mb-6">
-            <h2 class="text-3xl retro-heading text-[#962d27] uppercase tracking-wider" style="font-family: 'Black Han Sans', sans-serif !important;">BUTTER DINER RECEIPT</h2>
+            <h2 class="text-3xl retro-heading text-[#962d27] uppercase tracking-wider" style="font-family:'Black Han Sans',sans-serif!important;">BUTTER DINER RECEIPT</h2>
         </div>
         <div class="w-full flex gap-6 items-stretch">
-            <div class="w-[320px] bg-white diner-border p-4 flex flex-col justify-end items-center" style="border-radius: 0px !important; border: 2px solid #962d27 !important;">
-                <div id="capture-burger-renderer" class="flex flex-col items-center justify-end w-full h-[360px]">
-                </div>
+            <div class="w-[320px] bg-white diner-border p-4 flex flex-col justify-end items-center" style="border-radius:0!important;border:2px solid #962d27!important;">
+                <div id="capture-burger-renderer" class="flex flex-col items-center justify-end w-full h-[360px]"></div>
             </div>
-            <div id="capture-receipt-container" class="flex-1 bg-white p-5 receipt-tear flex flex-col text-[#1c1311]" style="border-radius: 0px !important; border: 2px solid #962d27 !important;">
-                <div class="text-center">
-                    <h4 class="text-sm font-bold tracking-tight uppercase text-[#962d27] font-mono">=== BUTTER DINER ===</h4>
-                    <p class="text-[9px] font-mono text-[#4a6635] uppercase tracking-widest font-bold">Retro Fast Food System</p>
-                    <p class="text-[9px] font-mono text-stone-500 border-b border-dashed border-stone-300 pb-2">DATE: 2026-06-22 // TICKET #042</p>
-                </div>
-                <div class="flex-grow font-mono text-[10px] my-3 pr-1 space-y-1.5" id="receipt-items-container" style="border-radius: 0px !important;"></div>
-                <div class="border-t-2 border-dashed border-stone-300 pt-2 font-mono text-xs space-y-1" style="border-radius: 0px !important;">
-                    <div class="flex justify-between font-bold text-[#962d27]" style="font-weight: bold; border-radius: 0px !important;">
-                        <span style="font-weight: bold;">TOTAL PRICE</span>
-                        <span id="receipt-total-price" style="font-weight: bold;">0₩</span>
-                    </div>
-                    <div class="flex justify-between text-[10px] text-stone-500" style="border-radius: 0px !important;">
-                        <span>INGREDIENT COUNT</span>
-                        <span id="receipt-total-count">0 EA</span>
-                    </div>
-                    <div class="text-center pt-2 select-none" style="border-radius: 0px !important;">
-                        <div id="receipt-status-stamp" class="text-[10px] tracking-widest font-bold" style="border-radius: 0px !important;">*** ORDER OPEN ***</div>
-                        <div id="barcode-graphic" class="flex justify-center items-center h-8 mt-2 bg-transparent" style="border-radius: 0px !important;">
-                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[4px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[2px] h-6 bg-black mx-[2px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[5px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[3px] h-6 bg-black mx-[3px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[4px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                        </div>
-                        <div class="text-[7px] text-stone-500 uppercase tracking-widest mt-1" style="border-radius: 0px !important;">BTR-500622-BGR</div>
-                    </div>
-                </div>
-            </div>
+            <div id="capture-receipt-container" class="flex-1 bg-white p-5 receipt-tear flex flex-col text-[#1c1311]" style="border-radius:0!important;border:2px solid #962d27!important;"></div>
+        </div>
+    </div>
+
+    <!-- SAVE POPUP MODAL -->
+    <div id="save-modal-overlay" class="save-modal-overlay" onclick="closeSaveModal(event)">
+        <div class="save-modal" onclick="event.stopPropagation()">
+            <h3>주문서 저장 완료!</h3>
+            <img id="save-preview-img" class="preview-img" src="" alt="저장된 주문서">
+            <button class="confirm-btn" onclick="closeSaveModal()">확인</button>
         </div>
     </div>
 
@@ -403,218 +287,192 @@
         let audioCtx = null;
 
         const pricing = {
-            long_tail: 3000, round_tail: 3000, chubby_tail: 3000, fluffy_tail: 3000,
-            tomato: 1000, lettuce: 1000, chicken: 1000, meat: 1000, cheese: 1000,
-            pointy_ears: 3000, round_ears: 3000, long_ears: 3000, folded_ears: 3000
+            long_tail:3000, round_tail:3000, chubby_tail:3000, fluffy_tail:3000,
+            tomato:1000, lettuce:1000, chicken:1000, meat:1000, cheese_a:1000, cheese_b:1000,
+            pointy_ears:3000, round_ears:3000, long_ears:3000, folded_ears:3000
         };
 
-        // ── Image URLs ──
-        // Burger display: all under-buns share one image
         const burgerImages = {
-            long_tail:    'https://i.imgur.com/euwLrjq.png',
-            round_tail:   'https://i.imgur.com/euwLrjq.png',
-            chubby_tail:  'https://i.imgur.com/euwLrjq.png',
-            fluffy_tail:  'https://i.imgur.com/euwLrjq.png',
-            pointy_ears:  'https://i.imgur.com/8Rmt7k5.png',
-            round_ears:   'https://i.imgur.com/SLxtW2c.png',
-            long_ears:    'https://i.imgur.com/iMA0xGj.png',
-            folded_ears:  'https://i.imgur.com/pnJ2Hdf.png',
-            tomato:       'https://i.imgur.com/ddFlR8Z.png',
-            lettuce:      'https://i.imgur.com/ZFU2ml3.png',
-            chicken:      'https://i.imgur.com/Nx9MEXN.png',
-            meat:         'https://i.imgur.com/URvIP1B.png',
-            cheese_a:     'https://i.imgur.com/pb9wwLH.png',
-            cheese_b:     'https://i.imgur.com/zBfkZn8.png',
+            long_tail:'https://i.imgur.com/euwLrjq.png',
+            round_tail:'https://i.imgur.com/euwLrjq.png',
+            chubby_tail:'https://i.imgur.com/euwLrjq.png',
+            fluffy_tail:'https://i.imgur.com/euwLrjq.png',
+            pointy_ears:'https://i.imgur.com/8Rmt7k5.png',
+            round_ears:'https://i.imgur.com/SLxtW2c.png',
+            long_ears:'https://i.imgur.com/iMA0xGj.png',
+            folded_ears:'https://i.imgur.com/pnJ2Hdf.png',
+            tomato:'https://i.imgur.com/ddFlR8Z.png',
+            lettuce:'https://i.imgur.com/ZFU2ml3.png',
+            chicken:'https://i.imgur.com/Nx9MEXN.png',
+            meat:'https://i.imgur.com/URvIP1B.png',
+            cheese_a:'https://i.imgur.com/pb9wwLH.png',
+            cheese_b:'https://i.imgur.com/zBfkZn8.png',
         };
+
+        // Cheese IDs for rule checking
+        function isCheese(id) { return id === 'cheese_a' || id === 'cheese_b'; }
 
         // ── Audio ──
-        function initAudio() {
-            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
+        function initAudio() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
         function playSound(type) {
-            initAudio();
-            if (!audioCtx) return;
+            initAudio(); if (!audioCtx) return;
             const now = audioCtx.currentTime;
             if (type === 'click') {
-                const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-                o.connect(g); g.connect(audioCtx.destination);
-                o.type='triangle'; o.frequency.setValueAtTime(320,now); o.frequency.exponentialRampToValueAtTime(120,now+0.08);
-                g.gain.setValueAtTime(0.12,now); g.gain.linearRampToValueAtTime(0,now+0.08);
-                o.start(now); o.stop(now+0.08);
+                const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);
+                o.type='triangle';o.frequency.setValueAtTime(320,now);o.frequency.exponentialRampToValueAtTime(120,now+0.08);
+                g.gain.setValueAtTime(0.12,now);g.gain.linearRampToValueAtTime(0,now+0.08);o.start(now);o.stop(now+0.08);
             } else if (type === 'add') {
-                const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-                o.connect(g); g.connect(audioCtx.destination);
-                o.type='sine'; o.frequency.setValueAtTime(220,now); o.frequency.exponentialRampToValueAtTime(440,now+0.12);
-                g.gain.setValueAtTime(0.15,now); g.gain.linearRampToValueAtTime(0,now+0.12);
-                o.start(now); o.stop(now+0.12);
+                const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);
+                o.type='sine';o.frequency.setValueAtTime(220,now);o.frequency.exponentialRampToValueAtTime(440,now+0.12);
+                g.gain.setValueAtTime(0.15,now);g.gain.linearRampToValueAtTime(0,now+0.12);o.start(now);o.stop(now+0.12);
             } else if (type === 'error') {
-                const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-                o.connect(g); g.connect(audioCtx.destination);
-                o.type='sawtooth'; o.frequency.setValueAtTime(140,now); o.frequency.setValueAtTime(135,now+0.1);
-                g.gain.setValueAtTime(0.18,now); g.gain.linearRampToValueAtTime(0,now+0.25);
-                o.start(now); o.stop(now+0.25);
+                const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);
+                o.type='sawtooth';o.frequency.setValueAtTime(140,now);o.frequency.setValueAtTime(135,now+0.1);
+                g.gain.setValueAtTime(0.18,now);g.gain.linearRampToValueAtTime(0,now+0.25);o.start(now);o.stop(now+0.25);
             } else if (type === 'complete') {
-                [261.63,329.63,392,523.25].forEach((f,i) => {
-                    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-                    o.type='triangle'; o.connect(g); g.connect(audioCtx.destination);
-                    const t = now + i * 0.07;
-                    o.frequency.setValueAtTime(f,t); g.gain.setValueAtTime(0.08,t); g.gain.linearRampToValueAtTime(0,t+0.15);
-                    o.start(t); o.stop(t+0.2);
+                [261.63,329.63,392,523.25].forEach((f,i)=>{
+                    const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='triangle';o.connect(g);g.connect(audioCtx.destination);
+                    const t=now+i*0.07;o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(0.08,t);g.gain.linearRampToValueAtTime(0,t+0.15);o.start(t);o.stop(t+0.2);
                 });
             }
         }
 
         function showAlert(msg) {
             playSound('error');
-            const alertBox = document.getElementById('diner-alert');
             document.getElementById('alert-text').innerText = msg;
-            alertBox.classList.remove('hidden');
-            alertBox.classList.add('translate-x-2');
-            setTimeout(() => alertBox.classList.remove('translate-x-2'), 100);
-            setTimeout(() => alertBox.classList.add('translate-x-1'), 150);
-            setTimeout(() => alertBox.classList.remove('translate-x-1'), 250);
+            const b = document.getElementById('diner-alert'); b.classList.remove('hidden');
+            b.classList.add('translate-x-2'); setTimeout(()=>b.classList.remove('translate-x-2'),100);
+            setTimeout(()=>b.classList.add('translate-x-1'),150); setTimeout(()=>b.classList.remove('translate-x-1'),250);
         }
         function hideAlert() { document.getElementById('diner-alert').classList.add('hidden'); }
 
-        function setStage(stageNum) {
-            initAudio(); playSound('click'); hideAlert();
-            currentStage = stageNum;
-            const panels = ['stage-1-panel','stage-2-panel','stage-3-panel'];
-            panels.forEach((id, i) => {
-                const el = document.getElementById(id);
-                if (i + 1 === stageNum) el.classList.remove('opacity-50','pointer-events-none');
+        function setStage(n) {
+            initAudio(); playSound('click'); hideAlert(); currentStage = n;
+            ['stage-1-panel','stage-2-panel','stage-3-panel'].forEach((id,i)=>{
+                const el=document.getElementById(id);
+                if(i+1===n) el.classList.remove('opacity-50','pointer-events-none');
                 else el.classList.add('opacity-50','pointer-events-none');
             });
-            document.getElementById('stage-4-panel').style.display = stageNum === 4 ? 'block' : 'none';
+            document.getElementById('stage-4-panel').style.display = n===4?'block':'none';
             updateGameLayout();
         }
 
-        function selectBottomBun(id, name) {
-            if (isCompleted) return;
-            initAudio(); hideAlert();
-            if (burgerStack.length > 0) burgerStack[0] = { id, name, category: 'bottom', price: pricing[id] };
-            else burgerStack.push({ id, name, category: 'bottom', price: pricing[id] });
+        function selectBottomBun(id,name) {
+            if(isCompleted) return; initAudio(); hideAlert();
+            if(burgerStack.length>0) burgerStack[0]={id,name,category:'bottom',price:pricing[id]};
+            else burgerStack.push({id,name,category:'bottom',price:pricing[id]});
             playSound('add');
             document.getElementById('stage-1-next').classList.remove('hidden');
             updateGameLayout();
         }
 
-        function addFilling(id, name) {
-            if (isCompleted) return;
-            initAudio(); hideAlert();
+        function addFilling(id,name) {
+            if(isCompleted) return; initAudio(); hideAlert();
             const len = burgerStack.length;
-            if (len === 0) { showAlert("언더번을 먼저 선택해야 재료를 올릴 수 있습니다!"); return; }
-            if (len === 1 && (id === 'cheese' || id === 'lettuce')) {
-                showAlert("조리 규정 위반: 언더번 바로 위에는 치즈나 양상추가 올라갈 수 없습니다!"); return;
-            }
-            if (id === 'cheese') {
-                const topItem = burgerStack[len - 1];
-                if (topItem.id === 'cheese') { showAlert("조리 규정 위반: 치즈는 겹쳐서 연속으로 쌓을 수 없습니다!"); return; }
-                if (topItem.id === 'lettuce') { showAlert("조리 규정 위반: 치즈는 양상추 위에 쌓일 수 없습니다!"); return; }
-                const allowed = ['tomato','chicken','meat'];
-                if (!allowed.includes(topItem.id)) { showAlert("조리 규정 위반: 치즈는 오직 토마토나 패티(치킨/고기) 위에만 적재 가능합니다!"); return; }
+            if(len===0){showAlert("언더번을 먼저 선택해야 재료를 올릴 수 있습니다!");return;}
+            if(len===1 && (isCheese(id)||id==='lettuce')){showAlert("조리 규정 위반: 언더번 바로 위에는 치즈나 양상추가 올라갈 수 없습니다!");return;}
+            if(isCheese(id)){
+                const top=burgerStack[len-1];
+                if(isCheese(top.id)){showAlert("조리 규정 위반: 치즈는 겹쳐서 연속으로 쌓을 수 없습니다!");return;}
+                if(top.id==='lettuce'){showAlert("조리 규정 위반: 치즈는 양상추 위에 쌓일 수 없습니다!");return;}
+                if(!['tomato','chicken','meat'].includes(top.id)){showAlert("조리 규정 위반: 치즈는 오직 토마토나 패티(치킨/고기) 위에만 적재 가능합니다!");return;}
             }
             playSound('add');
-
-            // Cheese A/B alternation
-            let renderKey = id;
-            if (id === 'cheese') {
-                const cheeseCount = burgerStack.filter(x => x.id === 'cheese').length;
-                renderKey = cheeseCount % 2 === 0 ? 'cheese_a' : 'cheese_b';
-            }
-            burgerStack.push({ id, name, category: 'filling', price: pricing[id], renderKey });
+            burgerStack.push({id,name,category:'filling',price:pricing[id]});
             updateGameLayout();
         }
 
-        function selectTopBun(id, name) {
-            if (isCompleted) return;
-            initAudio(); hideAlert();
-            if (burgerStack.length === 0) { showAlert("언더번이 준비되지 않았습니다!"); return; }
+        function selectTopBun(id,name) {
+            if(isCompleted) return; initAudio(); hideAlert();
+            if(burgerStack.length===0){showAlert("언더번이 준비되지 않았습니다!");return;}
             playSound('complete');
-            burgerStack.push({ id, name, category: 'top', price: pricing[id] });
-            isCompleted = true;
-            setStage(4);
+            burgerStack.push({id,name,category:'top',price:pricing[id]});
+            isCompleted=true; setStage(4);
         }
 
+        // ── FIX #4: Undo always works like Ctrl+Z ──
         function undoLastStep() {
-            if (burgerStack.length === 0) return;
-            initAudio(); hideAlert();
-            if (currentStage === 2 && burgerStack.length <= 1) {
-                showAlert("언더번은 속재료 선택 단계에서 제거할 수 없습니다. 변경을 원하시면 '주문 초기화'를 클릭하세요!"); return;
-            }
-            playSound('click');
-            if (isCompleted) { isCompleted = false; setStage(3); }
+            if(burgerStack.length===0) return;
+            initAudio(); hideAlert(); playSound('click');
+
+            // If completed, uncomplete first
+            if(isCompleted) isCompleted = false;
+
             burgerStack.pop();
-            if (currentStage === 3 && burgerStack.length > 0 && burgerStack[burgerStack.length - 1].category === 'bottom') setStage(2);
-            else updateGameLayout();
+
+            // Determine correct stage after undo
+            if(burgerStack.length===0){
+                document.getElementById('stage-1-next').classList.add('hidden');
+                setStage(1);
+            } else {
+                const last = burgerStack[burgerStack.length-1];
+                if(last.category==='bottom'){
+                    // Only bottom bun remains → stage 1 with NEXT visible
+                    document.getElementById('stage-1-next').classList.remove('hidden');
+                    setStage(1);
+                } else if(last.category==='filling'){
+                    setStage(2);
+                } else {
+                    setStage(2);
+                }
+            }
         }
 
         function resetDinerBurger() {
             initAudio(); playSound('click'); hideAlert();
-            burgerStack = []; isCompleted = false;
+            burgerStack=[]; isCompleted=false;
             document.getElementById('stage-1-next').classList.add('hidden');
             setStage(1);
         }
 
         function modifyBurger() {
-            if (!isCompleted) return;
-            initAudio(); playSound('click'); hideAlert();
-            if (burgerStack.length > 0 && burgerStack[burgerStack.length - 1].category === 'top') burgerStack.pop();
-            isCompleted = false;
-            setStage(2);
+            if(!isCompleted) return; initAudio(); playSound('click'); hideAlert();
+            if(burgerStack.length>0 && burgerStack[burgerStack.length-1].category==='top') burgerStack.pop();
+            isCompleted=false; setStage(2);
         }
 
         // ══════════════════════════════════════════
-        // Render burger stack with image overlapping
+        // Render burger with image overlap rules
         // ══════════════════════════════════════════
         function renderBurgerTo(container, animate) {
             container.innerHTML = '';
-            if (burgerStack.length === 0) return false;
+            if(burgerStack.length===0) return false;
 
-            // Render top-to-bottom (last item in array = top bun → first rendered)
-            for (let ri = 0; ri < burgerStack.length; ri++) {
-                const stackIdx = burgerStack.length - 1 - ri; // top of burger first
+            // Render top-to-bottom (last array item = top of burger → rendered first)
+            for(let ri=0; ri<burgerStack.length; ri++){
+                const stackIdx = burgerStack.length - 1 - ri;
                 const layer = burgerStack[stackIdx];
-
                 const wrapper = document.createElement('div');
-                wrapper.style.position = 'relative';
-                wrapper.style.display = 'flex';
-                wrapper.style.alignItems = 'center';
-                wrapper.style.justifyContent = 'center';
-                wrapper.style.width = '100%';
+                wrapper.style.cssText = 'position:relative;display:flex;align-items:center;justify-content:center;width:100%;';
 
-                // ── Z-INDEX ──
-                // Under bun = 100 (frontmost), Cheese = 90, others = position-based (lower = higher z)
-                if (layer.category === 'bottom') {
-                    wrapper.style.zIndex = 100;
-                } else if (layer.id === 'cheese') {
-                    wrapper.style.zIndex = 90;
-                } else {
-                    wrapper.style.zIndex = 10 + ri; // lower items (higher ri) get higher z
-                }
+                // ── Z-INDEX: underbun=100, cheese=90, others=position-based ──
+                if(layer.category==='bottom') wrapper.style.zIndex=100;
+                else if(isCheese(layer.id)) wrapper.style.zIndex=90;
+                else wrapper.style.zIndex = 10+ri;
 
-                // ── OVERLAP MARGIN ──
-                if (ri > 0) {
-                    // Check the item ABOVE this one (ri - 1 in render order = stackIdx + 1 in array)
-                    const aboveLayer = burgerStack[stackIdx + 1];
-                    if (aboveLayer && aboveLayer.id === 'cheese') {
+                // ── OVERLAP MARGINS ──
+                if(ri > 0){
+                    const aboveLayer = burgerStack[stackIdx+1]; // item above in stack
+                    if(aboveLayer && isCheese(aboveLayer.id)){
+                        // Item below cheese: 54px overlap
                         wrapper.style.marginTop = '-54px';
+                    } else if(isCheese(layer.id)){
+                        // FIX #1: Cheese itself moves 10px higher → -15px
+                        wrapper.style.marginTop = '-15px';
+                    } else if(layer.category==='bottom'){
+                        // FIX #3: Underbun gets 3px extra overlap → -8px
+                        wrapper.style.marginTop = '-8px';
                     } else {
                         wrapper.style.marginTop = '-5px';
                     }
                 }
 
-                // ── IMAGE ──
                 const img = document.createElement('img');
-                const imgKey = layer.renderKey || layer.id;
-                img.src = burgerImages[imgKey];
-                img.style.width = '260px';
-                img.style.height = 'auto';
-                img.style.display = 'block';
+                img.src = burgerImages[layer.id];
+                img.style.cssText = 'width:260px;height:auto;display:block;';
                 img.crossOrigin = 'anonymous';
                 img.draggable = false;
-                if (animate) img.className = 'layer-drop';
-
+                if(animate) img.className = 'layer-drop';
                 wrapper.appendChild(img);
                 container.appendChild(wrapper);
             }
@@ -628,138 +486,122 @@
             const receiptCount = document.getElementById('receipt-total-count');
             const receiptStatus = document.getElementById('receipt-status-stamp');
 
-            // 1. RENDER BURGER
-            if (burgerStack.length === 0) {
-                renderer.innerHTML = `
-                    <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-stone-400">
-                        <span class="text-xs tracking-widest font-mono uppercase font-bold text-stone-500 mb-2">PLATE IS EMPTY</span>
-                        <span class="text-[10px] font-mono leading-relaxed text-stone-400">STAGE 1에서 언더번을 선택하시면 조리 및 영수증 출력이 시작됩니다.</span>
-                    </div>`;
+            // 1. BURGER
+            if(burgerStack.length===0){
+                renderer.innerHTML = '<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-stone-400"><span class="text-xs tracking-widest font-mono uppercase font-bold text-stone-500 mb-2">PLATE IS EMPTY</span><span class="text-[10px] font-mono leading-relaxed text-stone-400">STAGE 1에서 언더번을 선택하시면 조리 및 영수증 출력이 시작됩니다.</span></div>';
             } else {
                 renderBurgerTo(renderer, true);
             }
 
-            // 2. RECEIPT
-            if (burgerStack.length === 0) {
-                receiptItems.innerHTML = `
-                    <div style="display:block;width:100%;text-align:center;padding:48px 0;font-family:monospace;color:#a3a3a3;font-size:10px;border-bottom:1px dashed #e5e5e5;text-transform:uppercase;">
-                        NO ITEMS ORDERED
-                    </div>`;
-                receiptTotal.innerText = '0₩';
-                receiptCount.innerText = '0 EA';
-                receiptStatus.innerText = '*** ORDER OPEN ***';
-                receiptStatus.className = 'text-[10px] tracking-widest font-bold text-amber-600';
+            // 2. RECEIPT — FIX #5: taller rows so text doesn't clip
+            if(burgerStack.length===0){
+                receiptItems.innerHTML = '<div style="display:block;width:100%;text-align:center;padding:48px 0;font-family:monospace;color:#a3a3a3;font-size:10px;border-bottom:1px dashed #e5e5e5;text-transform:uppercase;">NO ITEMS ORDERED</div>';
+                receiptTotal.innerText='0₩'; receiptCount.innerText='0 EA';
+                receiptStatus.innerText='*** ORDER OPEN ***';
+                receiptStatus.className='text-[10px] tracking-widest font-bold text-amber-600';
             } else {
-                receiptItems.innerHTML = '';
-                let total = 0;
-                for (let i = burgerStack.length - 1; i >= 0; i--) {
-                    const item = burgerStack[i];
-                    total += item.price;
-                    const row = document.createElement('div');
-                    row.style.cssText = 'display:block;width:100%;border-bottom:1px dotted #e5e5e5;padding:4px 0;overflow:hidden;height:22px;line-height:14px;';
-                    row.innerHTML = `
-                        <span style="float:left;width:65%;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:bold;font-size:10px;color:#1c1311;">${item.name}</span>
-                        <span style="float:right;width:35%;text-align:right;font-family:monospace;font-size:10px;color:#1c1311;">${item.price.toLocaleString()}₩</span>`;
+                receiptItems.innerHTML='';
+                let total=0;
+                for(let i=burgerStack.length-1;i>=0;i--){
+                    const item=burgerStack[i]; total+=item.price;
+                    const row=document.createElement('div');
+                    row.style.cssText='display:flex;justify-content:space-between;align-items:center;width:100%;border-bottom:1px dotted #e5e5e5;padding:5px 0;min-height:24px;';
+                    row.innerHTML=`<span style="font-weight:bold;font-size:11px;color:#1c1311;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.name}</span><span style="font-family:monospace;font-size:11px;color:#1c1311;white-space:nowrap;padding-left:8px;">${item.price.toLocaleString()}₩</span>`;
                     receiptItems.appendChild(row);
                 }
-                receiptTotal.innerText = `${total.toLocaleString()}₩`;
-                receiptCount.innerText = `${burgerStack.length} EA`;
-                if (isCompleted) {
-                    receiptStatus.innerText = '*** COMPLETED ***';
-                    receiptStatus.className = 'text-[10px] tracking-widest font-bold text-red-600';
-                } else {
-                    receiptStatus.innerText = '*** ORDER OPEN ***';
-                    receiptStatus.className = 'text-[10px] tracking-widest font-bold text-amber-600';
-                }
+                receiptTotal.innerText=`${total.toLocaleString()}₩`;
+                receiptCount.innerText=`${burgerStack.length} EA`;
+                if(isCompleted){receiptStatus.innerText='*** COMPLETED ***';receiptStatus.className='text-[10px] tracking-widest font-bold text-red-600';}
+                else{receiptStatus.innerText='*** ORDER OPEN ***';receiptStatus.className='text-[10px] tracking-widest font-bold text-amber-600';}
             }
 
             // 3. CONTROLS
-            const fc = burgerStack.filter(x => x.category === 'filling').length;
-            const fn = document.getElementById('stage-2-next');
-            if (fn) { fn.disabled = fc < 3; fn.style.opacity = fc >= 3 ? '1' : '0.5'; }
-            document.getElementById('global-undo').disabled = (burgerStack.length === 0 || isCompleted);
-            document.getElementById('modify-btn').disabled = !isCompleted;
-            document.getElementById('screenshot-btn').disabled = !isCompleted;
+            const fc=burgerStack.filter(x=>x.category==='filling').length;
+            const fn=document.getElementById('stage-2-next');
+            if(fn){fn.disabled=fc<3;fn.style.opacity=fc>=3?'1':'0.5';}
 
-            const s1 = document.getElementById('step-1');
-            const s2 = document.getElementById('step-2');
-            const s3 = document.getElementById('step-3');
-            s1.style.color = currentStage === 1 ? '#962d27' : '#a8a29e';
-            s2.style.color = currentStage === 2 ? '#962d27' : '#a8a29e';
-            s3.style.color = (currentStage >= 3) ? '#962d27' : '#a8a29e';
-            s1.style.borderBottom = 'none';
-            s2.style.borderBottom = 'none';
-            s3.style.borderBottom = 'none';
+            // FIX #4: undo enabled whenever stack is not empty (regardless of completion)
+            document.getElementById('global-undo').disabled = (burgerStack.length===0);
+
+            const s1=document.getElementById('step-1'),s2=document.getElementById('step-2'),s3=document.getElementById('step-3');
+            s1.style.color=currentStage===1?'#962d27':'#a8a29e';
+            s2.style.color=currentStage===2?'#962d27':'#a8a29e';
+            s3.style.color=currentStage>=3?'#962d27':'#a8a29e';
+            s1.style.borderBottom='none';s2.style.borderBottom='none';s3.style.borderBottom='none';
         }
 
-        // ── CAPTURE ──
+        // ── FIX #6: Capture with popup preview ──
         function captureAndSave() {
-            if (!isCompleted) return;
-            initAudio(); playSound('click');
-
+            if(!isCompleted) return; initAudio(); playSound('click');
             const captureTarget = document.getElementById('capture-target');
             const capBurger = document.getElementById('capture-burger-renderer');
 
-            // Render burger into capture container (no animation)
             renderBurgerTo(capBurger, false);
 
-            // Build receipt
+            // FIX #5: Receipt rows use flex instead of float, matching the live receipt
+            let receiptRows = '';
+            let total = 0;
+            for(let i=burgerStack.length-1;i>=0;i--){
+                const item=burgerStack[i]; total+=item.price;
+                receiptRows += `<div style="display:flex;justify-content:space-between;align-items:center;width:100%;border-bottom:1px dotted #e5e5e5;padding:5px 0;min-height:24px;">
+                    <span style="font-weight:bold;font-size:11px;color:#1c1311;">${item.name}</span>
+                    <span style="font-family:monospace;font-size:11px;color:#1c1311;">${item.price.toLocaleString()}₩</span>
+                </div>`;
+            }
+
             document.getElementById('capture-receipt-container').innerHTML = `
-                <div class="text-center">
-                    <h4 class="text-sm font-bold tracking-tight uppercase text-[#962d27] font-mono">=== BUTTER DINER ===</h4>
-                    <p class="text-[9px] font-mono text-[#4a6635] uppercase tracking-widest font-bold">Retro Fast Food System</p>
-                    <p class="text-[9px] font-mono text-stone-500 border-b border-dashed border-stone-300 pb-2">DATE: 2026-06-22 // TICKET #042</p>
+                <div style="text-align:center">
+                    <div style="font-weight:bold;font-size:13px;color:#962d27;font-family:monospace;letter-spacing:0.1em">=== BUTTER DINER ===</div>
+                    <div style="font-size:9px;color:#4a6635;font-family:monospace;letter-spacing:0.15em;text-transform:uppercase">Retro Fast Food System</div>
+                    <div style="font-size:9px;color:#999;font-family:monospace;border-bottom:1px dashed #ccc;padding-bottom:8px;margin-top:4px">DATE: ${new Date().toISOString().slice(0,10)} // TICKET #042</div>
                 </div>
-                <div class="flex-grow font-mono text-[10px] my-3 pr-1 space-y-1.5" style="border-radius: 0px !important;">
-                    ${document.getElementById('receipt-items-container').innerHTML}
-                </div>
-                <div class="border-t-2 border-dashed border-stone-300 pt-2 font-mono text-xs space-y-1" style="border-radius: 0px !important;">
-                    <div class="flex justify-between font-bold text-[#962d27]" style="font-weight:bold;border-radius:0px !important;">
-                        <span style="font-weight:bold;">TOTAL PRICE</span>
-                        <span style="font-weight:bold;">${document.getElementById('receipt-total-price').innerText}</span>
+                <div style="margin:12px 0;font-family:monospace;">${receiptRows}</div>
+                <div style="border-top:2px dashed #ccc;padding-top:8px;font-family:monospace;font-size:12px">
+                    <div style="display:flex;justify-content:space-between;font-weight:bold;color:#962d27">
+                        <span>TOTAL</span><span>${total.toLocaleString()}₩</span>
                     </div>
-                    <div class="flex justify-between text-[10px] text-stone-500" style="border-radius:0px !important;">
-                        <span>INGREDIENT COUNT</span>
-                        <span>${document.getElementById('receipt-total-count').innerText}</span>
+                    <div style="display:flex;justify-content:space-between;font-size:10px;color:#999;margin-top:2px">
+                        <span>COUNT</span><span>${burgerStack.length} EA</span>
                     </div>
-                    <div class="text-center pt-2 select-none" style="border-radius:0px !important;">
-                        <div class="text-[10px] tracking-widest font-bold" style="border-radius:0px !important;font-weight:bold;">*** ORDER COMPLETED ***</div>
-                        <div class="flex justify-center items-center h-8 mt-2 bg-transparent" style="border-radius:0px !important;">
-                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
-                            <div class="w-[4px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
-                            <div class="w-[2px] h-6 bg-black mx-[2px]" style="border-radius:0px !important;"></div>
-                            <div class="w-[5px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
-                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
-                            <div class="w-[3px] h-6 bg-black mx-[3px]" style="border-radius:0px !important;"></div>
-                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
-                            <div class="w-[4px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
-                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
+                    <div style="text-align:center;margin-top:14px">
+                        <div style="font-size:10px;font-weight:bold;letter-spacing:0.15em;color:#962d27">*** ORDER COMPLETED ***</div>
+                        <div style="margin-top:8px;display:flex;justify-content:center;align-items:center;height:24px">
+                            <span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 1px"></span>
+                            <span style="display:inline-block;width:4px;height:20px;background:#000;margin:0 1px"></span>
+                            <span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 2px"></span>
+                            <span style="display:inline-block;width:5px;height:20px;background:#000;margin:0 1px"></span>
+                            <span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 1px"></span>
+                            <span style="display:inline-block;width:3px;height:20px;background:#000;margin:0 3px"></span>
+                            <span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 1px"></span>
+                            <span style="display:inline-block;width:4px;height:20px;background:#000;margin:0 1px"></span>
+                            <span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 1px"></span>
                         </div>
-                        <div class="text-[7px] text-stone-500 uppercase tracking-widest mt-1" style="border-radius:0px !important;">BTR-500622-BGR</div>
+                        <div style="font-size:7px;color:#999;letter-spacing:0.15em;margin-top:4px">BTR-500622-BGR</div>
                     </div>
                 </div>`;
 
             captureTarget.style.display = 'flex';
 
-            // Wait for images to load before capturing
             const imgs = captureTarget.querySelectorAll('img');
-            let loaded = 0;
-            const total = imgs.length;
+            let loaded = 0; const imgTotal = imgs.length;
 
             function doCapture() {
-                requestAnimationFrame(function() {
-                    html2canvas(captureTarget, {
-                        backgroundColor: '#fcfaee',
-                        scale: 2,
-                        useCORS: true,
-                        logging: false,
-                        allowTaint: false,
-                    }).then(canvas => {
+                requestAnimationFrame(function(){
+                    html2canvas(captureTarget,{backgroundColor:'#fcfaee',scale:2,useCORS:true,logging:false,allowTaint:false})
+                    .then(canvas => {
+                        const dataUrl = canvas.toDataURL('image/png');
+
+                        // Download file
                         const link = document.createElement('a');
                         link.download = `butter-diner-burger-${Date.now()}.png`;
-                        link.href = canvas.toDataURL('image/png');
+                        link.href = dataUrl;
                         link.click();
+
                         captureTarget.style.display = 'none';
+
+                        // FIX #6: Show popup with preview
+                        document.getElementById('save-preview-img').src = dataUrl;
+                        document.getElementById('save-modal-overlay').classList.add('show');
                     }).catch(err => {
                         console.error("Capture failed:", err);
                         captureTarget.style.display = 'none';
@@ -767,17 +609,22 @@
                 });
             }
 
-            if (total === 0) { doCapture(); return; }
-            imgs.forEach(img => {
-                if (img.complete) { loaded++; if (loaded === total) doCapture(); }
-                else {
-                    img.onload = () => { loaded++; if (loaded === total) doCapture(); };
-                    img.onerror = () => { loaded++; if (loaded === total) doCapture(); };
+            if(imgTotal===0){doCapture();return;}
+            imgs.forEach(img=>{
+                if(img.complete){loaded++;if(loaded===imgTotal)doCapture();}
+                else{
+                    img.onload=()=>{loaded++;if(loaded===imgTotal)doCapture();};
+                    img.onerror=()=>{loaded++;if(loaded===imgTotal)doCapture();};
                 }
             });
         }
 
-        document.addEventListener('click', () => initAudio(), { once: true });
+        function closeSaveModal(e) {
+            if(e && e.target !== document.getElementById('save-modal-overlay')) return;
+            document.getElementById('save-modal-overlay').classList.remove('show');
+        }
+
+        document.addEventListener('click',()=>initAudio(),{once:true});
     </script>
 </body>
 </html>
