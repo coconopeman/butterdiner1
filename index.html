@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Butter Diner - Retro Burger Maker</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for Retro Diner Styling -->
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
@@ -17,46 +15,29 @@
             box-shadow: none !important;
             text-shadow: none !important;
         }
-        /* Custom selector for Heading Font (Black Han Sans) */
         .retro-heading {
             font-family: 'Black Han Sans', sans-serif !important;
             letter-spacing: -0.04em;
         }
-        /* Maximized Checkerboard Pattern size for classic vintage look */
         .checker-bg {
             background-color: #962d27;
             background-image: repeating-conic-gradient(#962d27 0% 25%, #fcfaee 0% 50%);
             background-size: 48px 48px;
             border-radius: 0px !important;
         }
-        /* Strict flat outline */
         .diner-border {
             border: 2px solid #962d27 !important;
         }
-        /* Custom Scrollbar Hiding */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        /* Jagged receipt graphic paper cuts */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .receipt-tear {
             clip-path: polygon(
                 0% 0%, 5% 1.5%, 10% 0%, 15% 1.5%, 20% 0%, 25% 1.5%, 30% 0%, 35% 1.5%, 40% 0%, 45% 1.5%, 50% 0%, 55% 1.5%, 60% 0%, 65% 1.5%, 70% 0%, 75% 1.5%, 80% 0%, 85% 1.5%, 90% 0%, 95% 1.5%, 100% 0%,
                 100% 100%, 95% 98.5%, 90% 100%, 85% 98.5%, 80% 100%, 75% 98.5%, 70% 100%, 65% 98.5%, 60% 100%, 55% 98.5%, 50% 100%, 45% 98.5%, 40% 100%, 35% 98.5%, 30% 100%, 25% 98.5%, 20% 100%, 15% 98.5%, 10% 100%, 5% 98.5%, 0% 100%
             );
         }
-        /* Force straight underlines with zero curling on edges */
-        #step-1, #step-2, #step-3, .border-b, .border-b-2 {
-            border-radius: 0px !important;
-        }
-        /* Strict flat barcode line overrides */
-        #barcode-graphic div {
-            border-radius: 0px !important;
-        }
-        /* Vintage cartoon shouting speech bubble style for NEXT button */
+        #step-1, #step-2, #step-3, .border-b, .border-b-2 { border-radius: 0px !important; }
+        #barcode-graphic div { border-radius: 0px !important; }
         .bubble-btn {
             position: relative;
             background-color: #edb12f;
@@ -96,39 +77,34 @@
             display: block;
             width: 0;
         }
-        .bubble-btn:hover:not(:disabled) {
-            background-color: #fff04a;
-        }
-        .bubble-btn:hover:not(:disabled)::after {
-            border-color: transparent #fff04a transparent transparent;
-        }
-        /* Stage pane animations */
-        .stage-pane {
-            transition: all 0.2s ease-in-out;
-        }
+        .bubble-btn:hover:not(:disabled) { background-color: #fff04a; }
+        .bubble-btn:hover:not(:disabled)::after { border-color: transparent #fff04a transparent transparent; }
+        .stage-pane { transition: all 0.2s ease-in-out; }
         @keyframes drop-down {
             0% { transform: translateY(-40px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
         }
-        .layer-drop {
-            animation: drop-down 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
-        }
-
-        /* ── FIX: Force full visibility inside capture target ── */
-        #capture-target svg,
-        #capture-target .layer-drop {
+        .layer-drop { animation: drop-down 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards; }
+        /* Force visibility in capture target */
+        #capture-target .layer-drop,
+        #capture-target img {
             animation: none !important;
             opacity: 1 !important;
             transform: none !important;
+        }
+        /* Menu card images */
+        .menu-card-img {
+            display: block;
+            margin: 0 auto;
+            object-fit: contain;
+            image-rendering: auto;
         }
     </style>
 </head>
 <body class="bg-[#fcfaee] text-[#1c1311] min-h-screen flex flex-col selection:bg-[#fff04a] overflow-x-hidden">
 
-    <!-- Oversized Retro Top Checkerboard Block -->
     <div class="h-10 w-full checker-bg border-b-2 border-[#1c1311]"></div>
 
-    <!-- Main Header -->
     <header class="bg-[#fcfaee] border-b-2 border-[#1c1311] py-5 px-4">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
             <div>
@@ -147,13 +123,11 @@
         </div>
     </header>
 
-    <!-- Main Play Area -->
     <main class="max-w-7xl mx-auto p-4 md:p-6 w-full flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- LEFT COLUMN: Rules & Active Burger View Platter -->
+        <!-- LEFT COLUMN -->
         <section class="lg:col-span-6 flex flex-col gap-5">
             
-            <!-- 1. Butter Burger Cooking Rules (Yellow Note Style) -->
             <div class="bg-[#fef9c3] p-5 relative overflow-hidden" style="border: 2px solid #962d27 !important;">
                 <h3 class="text-3xl retro-heading text-[#962d27] border-b border-dashed border-[#962d27] pb-2 mb-3" style="border-radius: 0px !important;">
                     버터버거 조리 수칙
@@ -168,105 +142,74 @@
                 </ul>
             </div>
 
-            <!-- 2. Burger Plate & Platter Display Area -->
             <div class="w-full flex-grow flex flex-col">
                 <div class="w-full h-full bg-[#fcfaf2] diner-border rounded-xl p-6 flex flex-col justify-center items-center relative select-none overflow-hidden" style="border: 2px solid #962d27 !important;">
-                    
-                    <!-- Visual Burger Stack Area (Always centered) -->
-                    <div id="burger-renderer" class="flex flex-col-reverse items-center justify-center w-full h-[360px] relative z-10 overflow-y-auto no-scrollbar">
+                    <div id="burger-renderer" class="flex flex-col items-center justify-end w-full h-[360px] relative z-10 overflow-y-auto no-scrollbar">
                         <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-stone-400">
                             <span class="text-xs tracking-widest font-mono uppercase font-bold text-stone-500 mb-2">PLATE IS EMPTY</span>
                             <span class="text-[10px] font-mono leading-relaxed text-stone-400">STAGE 1에서 언더번을 선택하시면 조리 및 영수증 출력이 시작됩니다.</span>
                         </div>
                     </div>
-
                 </div>
             </div>
 
         </section>
 
-        <!-- RIGHT COLUMN: Interaction Controller & Active Step Panel -->
+        <!-- RIGHT COLUMN -->
         <section class="lg:col-span-6 flex flex-col gap-5">
             
-            <!-- 1. Interactive Steps Progress Bar -->
             <div class="bg-white diner-border rounded-xl p-3.5 flex justify-between text-base select-none" style="border-color: #962d27 !important;">
                 <span id="step-1" class="text-[#962d27] pb-1 retro-heading" style="font-size: 28px !important;">1. 언더번 선택</span>
                 <span id="step-2" class="text-stone-400 pb-1 retro-heading" style="font-size: 28px !important;">2. 속재료 선택</span>
                 <span id="step-3" class="text-stone-400 pb-1 retro-heading" style="font-size: 28px !important;">3. 헤드번 선택</span>
             </div>
 
-            <!-- Custom Rule Alert Toast -->
             <div id="diner-alert" class="hidden bg-[#962d27] diner-border rounded-xl p-4 text-white text-sm font-mono tracking-wide">
                 <span class="font-bold">⚠️ 조리 규칙 위반:</span> <span id="alert-text">규칙 내용</span>
             </div>
 
-            <!-- 2. CLIPBOARD FOOD MENU COMPONENT -->
             <div class="relative bg-[#962d27] diner-border rounded-2xl p-6 select-none flex flex-col min-h-[620px]">
                 
-                <!-- Inner Food Paper Board (White sheets) -->
                 <div class="bg-white flex-1 p-5 relative flex flex-col gap-4 overflow-hidden rounded-md" style="border-radius: 4px !important;">
                     
-                    <!-- Right Body: Scrollable Stage Selection lists -->
                     <div class="flex-1 overflow-y-auto no-scrollbar space-y-6 text-stone-800 pr-1">
                         
-                        <!-- STAGE 1 SECTION -->
+                        <!-- STAGE 1: Under Bun -->
                         <div id="stage-1-panel" class="stage-pane space-y-3">
                             <div class="flex justify-between items-center border-b border-stone-100 pb-1.5" style="border-radius: 0px !important;">
                                 <span class="bg-[#edb12f]/30 text-[#962d27] font-mono text-xs px-2 py-0.5 rounded-md font-bold uppercase tracking-widest">start</span>
                                 <span id="stage-1-next" class="hidden">
-                                    <button onclick="setStage(2)" class="bubble-btn">
-                                        NEXT
-                                    </button>
+                                    <button onclick="setStage(2)" class="bubble-btn">NEXT</button>
                                 </span>
                             </div>
                             <div class="grid grid-cols-2 gap-2">
-                                <button onclick="selectBottomBun('long_tail', '긴꼬리')" class="retro-btn bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                <button onclick="selectBottomBun('long_tail', '긴꼬리')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
                                     <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <svg viewBox="0 0 260 80" class="h-10 w-auto">
-                                            <path d="M 210,40 Q 255,15 235,0 Q 215,10 215,30" fill="none" stroke="#1c1311" stroke-width="6"/>
-                                            <path d="M 210,40 Q 255,15 235,0 Q 215,10 215,30" fill="none" stroke="#edb12f" stroke-width="4"/>
-                                            <rect x="30" y="25" width="200" height="30" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <rect x="30" y="10" width="200" height="15" fill="#fff04a" stroke="#1c1311" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/HBelkZR.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
                                     </div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
                                         <span class="text-[#1c1311]">긴꼬리</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
                                     </div>
                                 </button>
-                                <button onclick="selectBottomBun('round_tail', '동글꼬리')" class="retro-btn bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                <button onclick="selectBottomBun('round_tail', '동글꼬리')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
                                     <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <svg viewBox="0 0 260 80" class="h-10 w-auto">
-                                            <circle cx="230" cy="35" r="15" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <circle cx="230" cy="35" r="8" fill="#fff04a" />
-                                            <rect x="30" y="25" width="200" height="30" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <rect x="30" y="10" width="200" height="15" fill="#fff04a" stroke="#1c1311" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/HSxLgXX.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
                                     </div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
                                         <span class="text-[#1c1311]">동글꼬리</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
                                     </div>
                                 </button>
-                                <button onclick="selectBottomBun('chubby_tail', '통통꼬리')" class="retro-btn bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                <button onclick="selectBottomBun('chubby_tail', '통통꼬리')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
                                     <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <svg viewBox="0 0 260 80" class="h-10 w-auto">
-                                            <rect x="210" y="15" width="35" height="35" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <line x1="222" y1="15" x2="222" y2="50" stroke="#802f06" stroke-width="3"/>
-                                            <line x1="234" y1="15" x2="234" y2="50" stroke="#802f06" stroke-width="3"/>
-                                            <rect x="30" y="25" width="200" height="30" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <rect x="30" y="10" width="200" height="15" fill="#fff04a" stroke="#1c1311" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/I8UHHBa.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
                                     </div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
                                         <span class="text-[#1c1311]">통통꼬리</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
                                     </div>
                                 </button>
-                                <button onclick="selectBottomBun('fluffy_tail', '복실꼬리')" class="retro-btn bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                <button onclick="selectBottomBun('fluffy_tail', '복실꼬리')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
                                     <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <svg viewBox="0 0 260 80" class="h-10 w-auto">
-                                            <path d="M 215,35 Q 210,15 225,20 Q 240,10 245,25 Q 255,35 240,45 Q 225,50 215,35 Z" fill="#fff04a" stroke="#1c1311" stroke-width="2"/>
-                                            <rect x="30" y="25" width="200" height="30" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <rect x="30" y="10" width="200" height="15" fill="#fff04a" stroke="#1c1311" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/F1z2F7a.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
                                     </div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
                                         <span class="text-[#1c1311]">복실꼬리</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
@@ -275,23 +218,18 @@
                             </div>
                         </div>
 
-                        <!-- STAGE 2 SECTION -->
+                        <!-- STAGE 2: Fillings -->
                         <div id="stage-2-panel" class="stage-pane space-y-3 opacity-50 pointer-events-none transition-opacity duration-300">
                             <div class="flex justify-between items-center border-b border-stone-100 pb-1.5" style="border-radius: 0px !important;">
                                 <span class="bg-[#edb12f]/30 text-[#962d27] font-mono text-xs px-2 py-0.5 rounded-md font-bold uppercase tracking-widest">inside</span>
                                 <span>
-                                    <button id="stage-2-next" onclick="setStage(3)" disabled class="bubble-btn disabled:opacity-50 disabled:cursor-not-allowed">
-                                        NEXT
-                                    </button>
+                                    <button id="stage-2-next" onclick="setStage(3)" disabled class="bubble-btn disabled:opacity-50 disabled:cursor-not-allowed">NEXT</button>
                                 </span>
                             </div>
                             <div class="grid grid-cols-3 sm:grid-cols-5 gap-1.5">
                                 <button onclick="addFilling('tomato', '토마토')" class="bg-[#962d27] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
                                     <div class="flex-grow flex items-center justify-center">
-                                        <svg viewBox="0 0 260 25" class="h-4 w-auto mx-auto">
-                                            <rect x="35" y="4" width="90" height="17" fill="#962d27" stroke="#fcfaee" stroke-width="2"/>
-                                            <rect x="135" y="4" width="90" height="17" fill="#962d27" stroke="#fcfaee" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/ddFlR8Z.png" class="menu-card-img" style="height:20px" crossorigin="anonymous">
                                     </div>
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius: 0px !important; font-size: 11px;">
                                         토마토<br><span class="font-mono text-[9px] opacity-80">1,000₩</span>
@@ -299,9 +237,7 @@
                                 </button>
                                 <button onclick="addFilling('lettuce', '양상추')" class="bg-[#4a6635] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
                                     <div class="flex-grow flex items-center justify-center">
-                                        <svg viewBox="0 0 260 25" class="h-4 w-auto mx-auto">
-                                            <polygon points="30,12 45,4 60,15 75,4 90,16 105,5 120,15 135,4 150,16 165,5 180,15 195,4 210,15 220,5 230,12 230,22 30,22" fill="#4a6635" stroke="#fcfaee" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/ZFU2ml3.png" class="menu-card-img" style="height:20px" crossorigin="anonymous">
                                     </div>
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius: 0px !important; font-size: 11px;">
                                         양상추<br><span class="font-mono text-[9px] opacity-80">1,000₩</span>
@@ -309,9 +245,7 @@
                                 </button>
                                 <button onclick="addFilling('chicken', '치킨')" class="bg-[#edb12f] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
                                     <div class="flex-grow flex items-center justify-center">
-                                        <svg viewBox="0 0 260 35" class="h-5 w-auto mx-auto">
-                                            <rect x="32" y="4" width="196" height="27" fill="#edb12f" stroke="#fcfaee" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/Nx9MEXN.png" class="menu-card-img" style="height:24px" crossorigin="anonymous">
                                     </div>
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius: 0px !important; font-size: 11px;">
                                         치킨<br><span class="font-mono text-[9px] opacity-80">1,000₩</span>
@@ -319,9 +253,7 @@
                                 </button>
                                 <button onclick="addFilling('meat', '고기')" class="bg-[#802f06] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
                                     <div class="flex-grow flex items-center justify-center">
-                                        <svg viewBox="0 0 260 35" class="h-5 w-auto mx-auto">
-                                            <rect x="32" y="4" width="196" height="27" fill="#802f06" stroke="#fcfaee" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/URvIP1B.png" class="menu-card-img" style="height:24px" crossorigin="anonymous">
                                     </div>
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius: 0px !important; font-size: 11px;">
                                         고기<br><span class="font-mono text-[9px] opacity-80">1,000₩</span>
@@ -329,9 +261,7 @@
                                 </button>
                                 <button onclick="addFilling('cheese', '치즈')" class="bg-[#fff04a] text-[#1c1311] py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
                                     <div class="flex-grow flex items-center justify-center">
-                                        <svg viewBox="0 0 260 20" class="h-4 w-auto mx-auto">
-                                            <polygon points="28,2 232,2 232,10 190,10 185,18 175,10 120,10 115,18 105,10 50,10 45,18 35,10 28,10" fill="#fff04a" stroke="#1c1311" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/pb9wwLH.png" class="menu-card-img" style="height:18px" crossorigin="anonymous">
                                     </div>
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius: 0px !important; font-size: 11px;">
                                         치즈<br><span class="font-mono text-[9px] opacity-80">1,000₩</span>
@@ -340,7 +270,7 @@
                             </div>
                         </div>
 
-                        <!-- STAGE 3 SECTION -->
+                        <!-- STAGE 3: Top Bun -->
                         <div id="stage-3-panel" class="stage-pane space-y-3 opacity-50 pointer-events-none transition-opacity duration-300">
                             <div class="border-b border-stone-100 pb-1.5" style="border-radius: 0px !important;">
                                 <span class="bg-[#edb12f]/30 text-[#962d27] font-mono text-xs px-2 py-0.5 rounded-md font-bold uppercase tracking-widest">final</span>
@@ -348,11 +278,7 @@
                             <div class="grid grid-cols-2 gap-2">
                                 <button onclick="selectTopBun('pointy_ears', '뾰족귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
                                     <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <svg viewBox="0 0 260 90" class="h-10 w-auto">
-                                            <polygon points="40,50 55,10 80,45" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <polygon points="220,50 205,10 180,45" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <path d="M 30,80 Q 30,35 130,35 Q 230,35 230,80 Z" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/8Rmt7k5.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
                                     </div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
                                         <span class="text-[#1c1311]">뾰족귀</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
@@ -360,35 +286,23 @@
                                 </button>
                                 <button onclick="selectTopBun('round_ears', '둥근귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
                                     <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <svg viewBox="0 0 260 90" class="h-10 w-auto">
-                                            <path d="M 40,52 A 20,20 0 0 1 80,48" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <path d="M 180,48 A 20,20 0 0 1 220,52" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <path d="M 30,80 Q 30,35 130,35 Q 230,35 230,80 Z" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/SLxtW2c.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
                                     </div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
                                         <span class="text-[#1c1311]">둥근귀</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
                                     </div>
                                 </button>
-                                <button onclick="selectTopBun('long_ears', '길쭉귀')" class="retro-btn bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                <button onclick="selectTopBun('long_ears', '길쭉귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
                                     <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <svg viewBox="0 0 260 90" class="h-10 w-auto">
-                                            <rect x="50" y="5" width="22" height="48" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <rect x="188" y="5" width="22" height="48" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <path d="M 30,80 Q 30,35 130,35 Q 230,35 230,80 Z" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/iMA0xGj.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
                                     </div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
                                         <span class="text-[#1c1311]">길쭉귀</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
                                     </div>
                                 </button>
-                                <button onclick="selectTopBun('folded_ears', '접힌귀')" class="retro-btn bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
+                                <button onclick="selectTopBun('folded_ears', '접힌귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
                                     <div class="w-full h-12 flex justify-center items-center mb-1">
-                                        <svg viewBox="0 0 260 90" class="h-10 w-auto">
-                                            <polygon points="40,50 45,25 65,25 60,50" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <polygon points="220,50 215,25 195,25 200,50" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                            <path d="M 30,80 Q 30,35 130,35 Q 230,35 230,80 Z" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                                        </svg>
+                                        <img src="https://i.imgur.com/pnJ2Hdf.png" class="menu-card-img" style="height:48px" crossorigin="anonymous">
                                     </div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius: 0px !important;">
                                         <span class="text-[#1c1311]">접힌귀</span> <span class="font-mono text-xs text-stone-500">3,000₩</span>
@@ -419,7 +333,6 @@
 
                 </div>
 
-                <!-- Global Step Manipulations -->
                 <div class="pt-3 flex gap-2">
                     <button id="global-undo" onclick="undoLastStep()" disabled class="flex-1 bg-[#edb12f] text-white font-bold p-2.5 text-sm uppercase tracking-wider rounded-xl disabled:opacity-40 disabled:cursor-not-allowed" style="border: 1px solid #ffffff !important;">
                         되돌리기
@@ -435,44 +348,34 @@
 
     </main>
 
-    <!-- HIGH-RESOLUTION CAPTURE OFFSCREEN CONTAINER -->
+    <!-- OFFSCREEN CAPTURE -->
     <div id="capture-target" class="absolute bg-[#fcfaee] p-8 diner-border flex flex-col items-center" style="left: -9999px; top: -9999px; width: 720px; display: none; border-radius: 0px !important; border: 2px solid #962d27 !important;">
-        
-        <!-- Header stamp -->
         <div class="text-center mb-6">
             <h2 class="text-3xl retro-heading text-[#962d27] uppercase tracking-wider" style="font-family: 'Black Han Sans', sans-serif !important;">BUTTER DINER RECEIPT</h2>
         </div>
-
         <div class="w-full flex gap-6 items-stretch">
-            
-            <!-- LEFT SCREENSHOT BURGER DISPLAY -->
-            <div class="w-[320px] bg-white diner-border p-4 flex flex-col justify-center items-center" style="border-radius: 0px !important; border: 2px solid #962d27 !important;">
-                <div id="capture-burger-renderer" class="flex flex-col-reverse items-center justify-center w-full h-[360px]">
+            <div class="w-[320px] bg-white diner-border p-4 flex flex-col justify-end items-center" style="border-radius: 0px !important; border: 2px solid #962d27 !important;">
+                <div id="capture-burger-renderer" class="flex flex-col items-center justify-end w-full h-[360px]">
                 </div>
             </div>
-
-            <!-- RIGHT SCREENSHOT VINTAGE TICKET -->
             <div id="capture-receipt-container" class="flex-1 bg-white p-5 receipt-tear flex flex-col text-[#1c1311]" style="border-radius: 0px !important; border: 2px solid #962d27 !important;">
                 <div class="text-center">
                     <h4 class="text-sm font-bold tracking-tight uppercase text-[#962d27] font-mono">=== BUTTER DINER ===</h4>
                     <p class="text-[9px] font-mono text-[#4a6635] uppercase tracking-widest font-bold">Retro Fast Food System</p>
                     <p class="text-[9px] font-mono text-stone-500 border-b border-dashed border-stone-300 pb-2">DATE: 2026-06-22 // TICKET #042</p>
                 </div>
-                <div class="flex-grow font-mono text-[10px] my-3 pr-1 space-y-1.5" id="receipt-items-container" style="border-radius: 0px !important;">
-                </div>
+                <div class="flex-grow font-mono text-[10px] my-3 pr-1 space-y-1.5" id="receipt-items-container" style="border-radius: 0px !important;"></div>
                 <div class="border-t-2 border-dashed border-stone-300 pt-2 font-mono text-xs space-y-1" style="border-radius: 0px !important;">
                     <div class="flex justify-between font-bold text-[#962d27]" style="font-weight: bold; border-radius: 0px !important;">
-                        <span style="font-weight: bold; border-radius: 0px !important;">TOTAL PRICE</span>
-                        <span id="receipt-total-price" style="font-weight: bold; border-radius: 0px !important;">0₩</span>
+                        <span style="font-weight: bold;">TOTAL PRICE</span>
+                        <span id="receipt-total-price" style="font-weight: bold;">0₩</span>
                     </div>
                     <div class="flex justify-between text-[10px] text-stone-500" style="border-radius: 0px !important;">
-                        <span style="border-radius: 0px !important;">INGREDIENT COUNT</span>
-                        <span id="receipt-total-count" style="border-radius: 0px !important;">0 EA</span>
+                        <span>INGREDIENT COUNT</span>
+                        <span id="receipt-total-count">0 EA</span>
                     </div>
                     <div class="text-center pt-2 select-none" style="border-radius: 0px !important;">
-                        <div id="receipt-status-stamp" class="text-[10px] tracking-widest font-bold" style="border-radius: 0px !important; font-weight: bold;">*** ORDER OPEN ***</div>
-                        
-                        <!-- Barcode Graphic Vector -->
+                        <div id="receipt-status-stamp" class="text-[10px] tracking-widest font-bold" style="border-radius: 0px !important;">*** ORDER OPEN ***</div>
                         <div id="barcode-graphic" class="flex justify-center items-center h-8 mt-2 bg-transparent" style="border-radius: 0px !important;">
                             <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
                             <div class="w-[4px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
@@ -488,16 +391,12 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 
-    <!-- Oversized Retro Bottom Checkerboard Block -->
     <div class="h-10 w-full checker-bg border-t-2 border-[#1c1311] mt-auto"></div>
 
     <script>
-        // Interactive game state machine
         let burgerStack = [];
         let currentStage = 1;
         let isCompleted = false;
@@ -509,157 +408,58 @@
             pointy_ears: 3000, round_ears: 3000, long_ears: 3000, folded_ears: 3000
         };
 
-        const svgTemplates = {
-            pointy_ears: `
-                <svg viewBox="0 0 260 90" width="260" height="90" class="layer-drop">
-                    <polygon points="40,50 55,10 80,45" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <polygon points="48,48 55,20 72,45" fill="#fff04a" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <polygon points="220,50 205,10 180,45" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <polygon points="212,48 205,20 188,45" fill="#fff04a" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <path d="M 30,80 Q 30,35 130,35 Q 230,35 230,80 Z" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <ellipse cx="90" cy="55" rx="3" ry="6" fill="#fff" transform="rotate(15 90 55)"/>
-                    <ellipse cx="130" cy="48" rx="3" ry="6" fill="#fff" transform="rotate(-10 130 48)"/>
-                    <ellipse cx="170" cy="58" rx="3" ry="6" fill="#fff" transform="rotate(25 170 58)"/>
-                </svg>`,
-            round_ears: `
-                <svg viewBox="0 0 260 90" width="260" height="90" class="layer-drop">
-                    <path d="M 40,52 A 20,20 0 0 1 80,48" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <path d="M 48,50 A 12,12 0 0 1 72,48" fill="#fff04a" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <path d="M 180,48 A 20,20 0 0 1 220,52" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <path d="M 188,48 A 12,12 0 0 1 212,50" fill="#fff04a" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <path d="M 30,80 Q 30,35 130,35 Q 230,35 230,80 Z" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <ellipse cx="95" cy="52" rx="3" ry="6" fill="#fff" transform="rotate(-15 95 52)"/>
-                    <ellipse cx="135" cy="46" rx="3" ry="6" fill="#fff" transform="rotate(5 135 46)"/>
-                    <ellipse cx="165" cy="54" rx="3" ry="6" fill="#fff" transform="rotate(-25 165 54)"/>
-                </svg>`,
-            long_ears: `
-                <svg viewBox="0 0 260 90" width="260" height="90" class="layer-drop">
-                    <rect x="50" y="5" width="22" height="48" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <rect x="55" y="12" width="12" height="35" fill="#fff04a" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <rect x="188" y="5" width="22" height="48" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <rect x="193" y="12" width="12" height="35" fill="#fff04a" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <path d="M 30,80 Q 30,35 130,35 Q 230,35 230,80 Z" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <ellipse cx="100" cy="55" rx="3" ry="6" fill="#fff" transform="rotate(20 100 55)"/>
-                    <ellipse cx="130" cy="50" rx="3" ry="6" fill="#fff" transform="rotate(-5 130 50)"/>
-                    <ellipse cx="160" cy="55" rx="3" ry="6" fill="#fff" transform="rotate(15 160 55)"/>
-                </svg>`,
-            folded_ears: `
-                <svg viewBox="0 0 260 90" width="260" height="90" class="layer-drop">
-                    <polygon points="40,50 45,25 65,25 60,50" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <polygon points="43,47 46,32 57,32 55,47" fill="#fff04a" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <polygon points="220,50 215,25 195,25 200,50" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <polygon points="217,47 214,32 203,32 205,47" fill="#fff04a" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <path d="M 30,80 Q 30,35 130,35 Q 230,35 230,80 Z" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <ellipse cx="90" cy="55" rx="3" ry="6" fill="#fff" transform="rotate(15 90 55)"/>
-                    <ellipse cx="130" cy="48" rx="3" ry="6" fill="#fff" transform="rotate(-10 130 48)"/>
-                    <ellipse cx="170" cy="58" rx="3" ry="6" fill="#fff" transform="rotate(25 170 58)"/>
-                </svg>`,
-            long_tail: `
-                <svg viewBox="0 0 260 80" width="260" height="80" class="layer-drop">
-                    <path d="M 210,40 Q 255,15 235,0 Q 215,10 215,30" fill="none" stroke="#1c1311" stroke-width="6" stroke-linecap="square"/>
-                    <path d="M 210,40 Q 255,15 235,0 Q 215,10 215,30" fill="none" stroke="#edb12f" stroke-width="4" stroke-linecap="square"/>
-                    <rect x="30" y="25" width="200" height="30" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <rect x="30" y="10" width="200" height="15" fill="#fff04a" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                </svg>`,
-            round_tail: `
-                <svg viewBox="0 0 260 80" width="260" height="80" class="layer-drop">
-                    <circle cx="230" cy="35" r="15" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                    <circle cx="230" cy="35" r="8" fill="#fff04a" />
-                    <rect x="30" y="25" width="200" height="30" fill="#edb12f" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                    <rect x="30" y="10" width="200" height="15" fill="#fff04a" stroke="#1c1311" stroke-width="2" stroke-linejoin="miter"/>
-                </svg>`,
-            chubby_tail: `
-                <svg viewBox="0 0 260 80" width="260" height="80" class="layer-drop">
-                    <rect x="210" y="15" width="35" height="35" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                    <line x1="222" y1="15" x2="222" y2="50" stroke="#802f06" stroke-width="3"/>
-                    <line x1="234" y1="15" x2="234" y2="50" stroke="#802f06" stroke-width="3"/>
-                    <rect x="30" y="25" width="200" height="30" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                    <rect x="30" y="10" width="200" height="15" fill="#fff04a" stroke="#1c1311" stroke-width="2"/>
-                </svg>`,
-            fluffy_tail: `
-                <svg viewBox="0 0 260 80" width="260" height="80" class="layer-drop">
-                    <path d="M 215,35 Q 210,15 225,20 Q 240,10 245,25 Q 255,35 240,45 Q 225,50 215,35 Z" fill="#fff04a" stroke="#1c1311" stroke-width="2"/>
-                    <rect x="30" y="25" width="200" height="30" fill="#edb12f" stroke="#1c1311" stroke-width="2"/>
-                    <rect x="30" y="10" width="200" height="15" fill="#fff04a" stroke="#1c1311" stroke-width="2"/>
-                </svg>`,
-            tomato: `
-                <svg viewBox="0 0 260 25" width="260" height="25" class="layer-drop">
-                    <rect x="35" y="4" width="90" height="17" fill="#962d27" stroke="#fcfaee" stroke-width="2"/>
-                    <rect x="135" y="4" width="90" height="17" fill="#962d27" stroke="#fcfaee" stroke-width="2"/>
-                </svg>`,
-            lettuce: `
-                <svg viewBox="0 0 260 25" width="260" height="25" class="layer-drop">
-                    <polygon points="30,12 45,4 60,15 75,4 90,16 105,5 120,15 135,4 150,16 165,5 180,15 195,4 210,15 220,5 230,12 230,22 30,22" fill="#4a6635" stroke="#fcfaee" stroke-width="2"/>
-                </svg>`,
-            chicken: `
-                <svg viewBox="0 0 260 35" width="260" height="35" class="layer-drop">
-                    <rect x="32" y="4" width="196" height="27" fill="#edb12f" stroke="#fcfaee" stroke-width="2"/>
-                </svg>`,
-            meat: `
-                <svg viewBox="0 0 260 35" width="260" height="35" class="layer-drop">
-                    <rect x="32" y="4" width="196" height="27" fill="#802f06" stroke="#fcfaee" stroke-width="2"/>
-                </svg>`,
-            cheese: `
-                <svg viewBox="0 0 260 20" width="260" height="20" class="layer-drop">
-                    <polygon points="28,2 232,2 232,10 190,10 185,18 175,10 120,10 115,18 105,10 50,10 45,18 35,10 28,10" fill="#fff04a" stroke="#1c1311" stroke-width="2"/>
-                </svg>`
+        // ── Image URLs ──
+        // Burger display: all under-buns share one image
+        const burgerImages = {
+            long_tail:    'https://i.imgur.com/euwLrjq.png',
+            round_tail:   'https://i.imgur.com/euwLrjq.png',
+            chubby_tail:  'https://i.imgur.com/euwLrjq.png',
+            fluffy_tail:  'https://i.imgur.com/euwLrjq.png',
+            pointy_ears:  'https://i.imgur.com/8Rmt7k5.png',
+            round_ears:   'https://i.imgur.com/SLxtW2c.png',
+            long_ears:    'https://i.imgur.com/iMA0xGj.png',
+            folded_ears:  'https://i.imgur.com/pnJ2Hdf.png',
+            tomato:       'https://i.imgur.com/ddFlR8Z.png',
+            lettuce:      'https://i.imgur.com/ZFU2ml3.png',
+            chicken:      'https://i.imgur.com/Nx9MEXN.png',
+            meat:         'https://i.imgur.com/URvIP1B.png',
+            cheese_a:     'https://i.imgur.com/pb9wwLH.png',
+            cheese_b:     'https://i.imgur.com/zBfkZn8.png',
         };
 
+        // ── Audio ──
         function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         }
-
         function playSound(type) {
             initAudio();
             if (!audioCtx) return;
-
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
             const now = audioCtx.currentTime;
-
             if (type === 'click') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(320, now);
-                osc.frequency.exponentialRampToValueAtTime(120, now + 0.08);
-                gain.gain.setValueAtTime(0.12, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.08);
-                osc.start(now);
-                osc.stop(now + 0.08);
+                const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+                o.connect(g); g.connect(audioCtx.destination);
+                o.type='triangle'; o.frequency.setValueAtTime(320,now); o.frequency.exponentialRampToValueAtTime(120,now+0.08);
+                g.gain.setValueAtTime(0.12,now); g.gain.linearRampToValueAtTime(0,now+0.08);
+                o.start(now); o.stop(now+0.08);
             } else if (type === 'add') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(220, now);
-                osc.frequency.exponentialRampToValueAtTime(440, now + 0.12);
-                gain.gain.setValueAtTime(0.15, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.12);
-                osc.start(now);
-                osc.stop(now + 0.12);
+                const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+                o.connect(g); g.connect(audioCtx.destination);
+                o.type='sine'; o.frequency.setValueAtTime(220,now); o.frequency.exponentialRampToValueAtTime(440,now+0.12);
+                g.gain.setValueAtTime(0.15,now); g.gain.linearRampToValueAtTime(0,now+0.12);
+                o.start(now); o.stop(now+0.12);
             } else if (type === 'error') {
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(140, now);
-                osc.frequency.setValueAtTime(135, now + 0.1);
-                gain.gain.setValueAtTime(0.18, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.25);
-                osc.start(now);
-                osc.stop(now + 0.25);
+                const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+                o.connect(g); g.connect(audioCtx.destination);
+                o.type='sawtooth'; o.frequency.setValueAtTime(140,now); o.frequency.setValueAtTime(135,now+0.1);
+                g.gain.setValueAtTime(0.18,now); g.gain.linearRampToValueAtTime(0,now+0.25);
+                o.start(now); o.stop(now+0.25);
             } else if (type === 'complete') {
-                osc.type = 'square';
-                const arpeggio = [261.63, 329.63, 392.00, 523.25];
-                arpeggio.forEach((pitch, i) => {
-                    const o = audioCtx.createOscillator();
-                    const g = audioCtx.createGain();
-                    o.type = 'triangle';
-                    o.connect(g);
-                    g.connect(audioCtx.destination);
-                    const onset = now + (i * 0.07);
-                    o.frequency.setValueAtTime(pitch, onset);
-                    g.gain.setValueAtTime(0.08, onset);
-                    g.gain.linearRampToValueAtTime(0, onset + 0.15);
-                    o.start(onset);
-                    o.stop(onset + 0.2);
+                [261.63,329.63,392,523.25].forEach((f,i) => {
+                    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+                    o.type='triangle'; o.connect(g); g.connect(audioCtx.destination);
+                    const t = now + i * 0.07;
+                    o.frequency.setValueAtTime(f,t); g.gain.setValueAtTime(0.08,t); g.gain.linearRampToValueAtTime(0,t+0.15);
+                    o.start(t); o.stop(t+0.2);
                 });
             }
         }
@@ -667,120 +467,69 @@
         function showAlert(msg) {
             playSound('error');
             const alertBox = document.getElementById('diner-alert');
-            const alertText = document.getElementById('alert-text');
-            alertText.innerText = msg;
+            document.getElementById('alert-text').innerText = msg;
             alertBox.classList.remove('hidden');
-            
             alertBox.classList.add('translate-x-2');
             setTimeout(() => alertBox.classList.remove('translate-x-2'), 100);
             setTimeout(() => alertBox.classList.add('translate-x-1'), 150);
             setTimeout(() => alertBox.classList.remove('translate-x-1'), 250);
         }
-
-        function hideAlert() {
-            document.getElementById('diner-alert').classList.add('hidden');
-        }
+        function hideAlert() { document.getElementById('diner-alert').classList.add('hidden'); }
 
         function setStage(stageNum) {
-            initAudio();
-            playSound('click');
-            hideAlert();
+            initAudio(); playSound('click'); hideAlert();
             currentStage = stageNum;
-
-            const stage1 = document.getElementById('stage-1-panel');
-            const stage2 = document.getElementById('stage-2-panel');
-            const stage3 = document.getElementById('stage-3-panel');
-            const stage4 = document.getElementById('stage-4-panel');
-
-            stage1.classList.add('opacity-50', 'pointer-events-none');
-            stage2.classList.add('opacity-50', 'pointer-events-none');
-            stage3.classList.add('opacity-50', 'pointer-events-none');
-            stage4.style.display = 'none';
-
-            if (currentStage === 1) {
-                stage1.classList.remove('opacity-50', 'pointer-events-none');
-            } else if (currentStage === 2) {
-                stage2.classList.remove('opacity-50', 'pointer-events-none');
-            } else if (currentStage === 3) {
-                stage3.classList.remove('opacity-50', 'pointer-events-none');
-            } else if (currentStage === 4) {
-                stage4.style.display = 'block';
-            }
-
+            const panels = ['stage-1-panel','stage-2-panel','stage-3-panel'];
+            panels.forEach((id, i) => {
+                const el = document.getElementById(id);
+                if (i + 1 === stageNum) el.classList.remove('opacity-50','pointer-events-none');
+                else el.classList.add('opacity-50','pointer-events-none');
+            });
+            document.getElementById('stage-4-panel').style.display = stageNum === 4 ? 'block' : 'none';
             updateGameLayout();
         }
 
         function selectBottomBun(id, name) {
             if (isCompleted) return;
-            initAudio();
-            hideAlert();
-
-            if (burgerStack.length > 0) {
-                burgerStack[0] = { id, name, category: 'bottom', price: pricing[id] };
-                playSound('add');
-            } else {
-                burgerStack.push({ id, name, category: 'bottom', price: pricing[id] });
-                playSound('add');
-            }
-
+            initAudio(); hideAlert();
+            if (burgerStack.length > 0) burgerStack[0] = { id, name, category: 'bottom', price: pricing[id] };
+            else burgerStack.push({ id, name, category: 'bottom', price: pricing[id] });
+            playSound('add');
             document.getElementById('stage-1-next').classList.remove('hidden');
             updateGameLayout();
         }
 
         function addFilling(id, name) {
             if (isCompleted) return;
-            initAudio();
-            hideAlert();
-
+            initAudio(); hideAlert();
             const len = burgerStack.length;
-
-            if (len === 0) {
-                showAlert("언더번을 먼저 선택해야 재료를 올릴 수 있습니다!");
-                return;
+            if (len === 0) { showAlert("언더번을 먼저 선택해야 재료를 올릴 수 있습니다!"); return; }
+            if (len === 1 && (id === 'cheese' || id === 'lettuce')) {
+                showAlert("조리 규정 위반: 언더번 바로 위에는 치즈나 양상추가 올라갈 수 없습니다!"); return;
             }
-
-            if (len === 1) {
-                if (id === 'cheese' || id === 'lettuce') {
-                    showAlert("조리 규정 위반: 언더번 바로 위에는 치즈나 양상추가 올라갈 수 없습니다!");
-                    return;
-                }
-            }
-
             if (id === 'cheese') {
                 const topItem = burgerStack[len - 1];
-
-                if (topItem.id === 'cheese') {
-                    showAlert("조리 규정 위반: 치즈는 겹쳐서 연속으로 쌓을 수 없습니다!");
-                    return;
-                }
-
-                if (topItem.id === 'lettuce') {
-                    showAlert("조리 규정 위반: 치즈는 양상추 위에 쌓일 수 없습니다!");
-                    return;
-                }
-
-                const allowedBases = ['tomato', 'chicken', 'meat'];
-                if (!allowedBases.includes(topItem.id)) {
-                    showAlert("조리 규정 위반: 치즈는 오직 토마토나 패티(치킨/고기) 위에만 적재 가능합니다!");
-                    return;
-                }
+                if (topItem.id === 'cheese') { showAlert("조리 규정 위반: 치즈는 겹쳐서 연속으로 쌓을 수 없습니다!"); return; }
+                if (topItem.id === 'lettuce') { showAlert("조리 규정 위반: 치즈는 양상추 위에 쌓일 수 없습니다!"); return; }
+                const allowed = ['tomato','chicken','meat'];
+                if (!allowed.includes(topItem.id)) { showAlert("조리 규정 위반: 치즈는 오직 토마토나 패티(치킨/고기) 위에만 적재 가능합니다!"); return; }
             }
-
             playSound('add');
-            burgerStack.push({ id, name, category: 'filling', price: pricing[id] });
+
+            // Cheese A/B alternation
+            let renderKey = id;
+            if (id === 'cheese') {
+                const cheeseCount = burgerStack.filter(x => x.id === 'cheese').length;
+                renderKey = cheeseCount % 2 === 0 ? 'cheese_a' : 'cheese_b';
+            }
+            burgerStack.push({ id, name, category: 'filling', price: pricing[id], renderKey });
             updateGameLayout();
         }
 
         function selectTopBun(id, name) {
             if (isCompleted) return;
-            initAudio();
-            hideAlert();
-
-            if (burgerStack.length === 0) {
-                showAlert("언더번이 준비되지 않았습니다!");
-                return;
-            }
-
+            initAudio(); hideAlert();
+            if (burgerStack.length === 0) { showAlert("언더번이 준비되지 않았습니다!"); return; }
             playSound('complete');
             burgerStack.push({ id, name, category: 'top', price: pricing[id] });
             isCompleted = true;
@@ -789,50 +538,87 @@
 
         function undoLastStep() {
             if (burgerStack.length === 0) return;
-            initAudio();
-            hideAlert();
-
+            initAudio(); hideAlert();
             if (currentStage === 2 && burgerStack.length <= 1) {
-                showAlert("언더번은 속재료 선택 단계에서 제거할 수 없습니다. 변경을 원하시면 '주문 초기화'를 클릭하세요!");
-                return;
+                showAlert("언더번은 속재료 선택 단계에서 제거할 수 없습니다. 변경을 원하시면 '주문 초기화'를 클릭하세요!"); return;
             }
-
             playSound('click');
-            if (isCompleted) {
-                isCompleted = false;
-                setStage(3);
-            }
-
+            if (isCompleted) { isCompleted = false; setStage(3); }
             burgerStack.pop();
-            
-            if (currentStage === 3 && burgerStack.length > 0 && burgerStack[burgerStack.length - 1].category === 'bottom') {
-                setStage(2);
-            } else {
-                updateGameLayout();
-            }
+            if (currentStage === 3 && burgerStack.length > 0 && burgerStack[burgerStack.length - 1].category === 'bottom') setStage(2);
+            else updateGameLayout();
         }
 
         function resetDinerBurger() {
-            initAudio();
-            playSound('click');
-            hideAlert();
-            burgerStack = [];
-            isCompleted = false;
+            initAudio(); playSound('click'); hideAlert();
+            burgerStack = []; isCompleted = false;
             document.getElementById('stage-1-next').classList.add('hidden');
             setStage(1);
         }
 
         function modifyBurger() {
             if (!isCompleted) return;
-            initAudio();
-            playSound('click');
-            hideAlert();
-
-            if (burgerStack.length > 0 && burgerStack[burgerStack.length - 1].category === 'top') {
-                burgerStack.pop();
-            }
+            initAudio(); playSound('click'); hideAlert();
+            if (burgerStack.length > 0 && burgerStack[burgerStack.length - 1].category === 'top') burgerStack.pop();
             isCompleted = false;
             setStage(2);
+        }
+
+        // ══════════════════════════════════════════
+        // Render burger stack with image overlapping
+        // ══════════════════════════════════════════
+        function renderBurgerTo(container, animate) {
+            container.innerHTML = '';
+            if (burgerStack.length === 0) return false;
+
+            // Render top-to-bottom (last item in array = top bun → first rendered)
+            for (let ri = 0; ri < burgerStack.length; ri++) {
+                const stackIdx = burgerStack.length - 1 - ri; // top of burger first
+                const layer = burgerStack[stackIdx];
+
+                const wrapper = document.createElement('div');
+                wrapper.style.position = 'relative';
+                wrapper.style.display = 'flex';
+                wrapper.style.alignItems = 'center';
+                wrapper.style.justifyContent = 'center';
+                wrapper.style.width = '100%';
+
+                // ── Z-INDEX ──
+                // Under bun = 100 (frontmost), Cheese = 90, others = position-based (lower = higher z)
+                if (layer.category === 'bottom') {
+                    wrapper.style.zIndex = 100;
+                } else if (layer.id === 'cheese') {
+                    wrapper.style.zIndex = 90;
+                } else {
+                    wrapper.style.zIndex = 10 + ri; // lower items (higher ri) get higher z
+                }
+
+                // ── OVERLAP MARGIN ──
+                if (ri > 0) {
+                    // Check the item ABOVE this one (ri - 1 in render order = stackIdx + 1 in array)
+                    const aboveLayer = burgerStack[stackIdx + 1];
+                    if (aboveLayer && aboveLayer.id === 'cheese') {
+                        wrapper.style.marginTop = '-54px';
+                    } else {
+                        wrapper.style.marginTop = '-5px';
+                    }
+                }
+
+                // ── IMAGE ──
+                const img = document.createElement('img');
+                const imgKey = layer.renderKey || layer.id;
+                img.src = burgerImages[imgKey];
+                img.style.width = '260px';
+                img.style.height = 'auto';
+                img.style.display = 'block';
+                img.crossOrigin = 'anonymous';
+                img.draggable = false;
+                if (animate) img.className = 'layer-drop';
+
+                wrapper.appendChild(img);
+                container.appendChild(wrapper);
+            }
+            return true;
         }
 
         function updateGameLayout() {
@@ -842,35 +628,23 @@
             const receiptCount = document.getElementById('receipt-total-count');
             const receiptStatus = document.getElementById('receipt-status-stamp');
 
+            // 1. RENDER BURGER
             if (burgerStack.length === 0) {
                 renderer.innerHTML = `
                     <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-stone-400">
                         <span class="text-xs tracking-widest font-mono uppercase font-bold text-stone-500 mb-2">PLATE IS EMPTY</span>
                         <span class="text-[10px] font-mono leading-relaxed text-stone-400">STAGE 1에서 언더번을 선택하시면 조리 및 영수증 출력이 시작됩니다.</span>
-                    </div>
-                `;
+                    </div>`;
             } else {
-                renderer.innerHTML = '';
-                
-                for (let i = 0; i < burgerStack.length; i++) {
-                    const layer = burgerStack[i];
-                    const wrapper = document.createElement('div');
-                    
-                    wrapper.className = 'relative flex items-center justify-center w-full transition-all duration-200';
-                    wrapper.style.zIndex = 10 + i;
-                    wrapper.style.marginBottom = '0px';
-
-                    wrapper.innerHTML = svgTemplates[layer.id];
-                    renderer.appendChild(wrapper);
-                }
+                renderBurgerTo(renderer, true);
             }
 
+            // 2. RECEIPT
             if (burgerStack.length === 0) {
                 receiptItems.innerHTML = `
-                    <div style="display: block; width: 100%; text-align: center; padding: 48px 0; font-family: monospace; color: #a3a3a3; font-size: 10px; border-bottom: 1px dashed #e5e5e5; text-transform: uppercase;">
+                    <div style="display:block;width:100%;text-align:center;padding:48px 0;font-family:monospace;color:#a3a3a3;font-size:10px;border-bottom:1px dashed #e5e5e5;text-transform:uppercase;">
                         NO ITEMS ORDERED
-                    </div>
-                `;
+                    </div>`;
                 receiptTotal.innerText = '0₩';
                 receiptCount.innerText = '0 EA';
                 receiptStatus.innerText = '*** ORDER OPEN ***';
@@ -878,30 +652,18 @@
             } else {
                 receiptItems.innerHTML = '';
                 let total = 0;
-
                 for (let i = burgerStack.length - 1; i >= 0; i--) {
                     const item = burgerStack[i];
                     total += item.price;
-
                     const row = document.createElement('div');
-                    row.style.display = 'block';
-                    row.style.width = '100%';
-                    row.style.borderBottom = '1px dotted #e5e5e5';
-                    row.style.padding = '4px 0';
-                    row.style.overflow = 'hidden';
-                    row.style.height = '22px';
-                    row.style.lineHeight = '14px';
-
+                    row.style.cssText = 'display:block;width:100%;border-bottom:1px dotted #e5e5e5;padding:4px 0;overflow:hidden;height:22px;line-height:14px;';
                     row.innerHTML = `
-                        <span style="float: left; width: 65%; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; font-size: 10px; color: #1c1311;">${item.name}</span>
-                        <span style="float: right; width: 35%; text-align: right; font-family: monospace; font-size: 10px; color: #1c1311;">${item.price.toLocaleString()}₩</span>
-                    `;
+                        <span style="float:left;width:65%;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:bold;font-size:10px;color:#1c1311;">${item.name}</span>
+                        <span style="float:right;width:35%;text-align:right;font-family:monospace;font-size:10px;color:#1c1311;">${item.price.toLocaleString()}₩</span>`;
                     receiptItems.appendChild(row);
                 }
-
                 receiptTotal.innerText = `${total.toLocaleString()}₩`;
                 receiptCount.innerText = `${burgerStack.length} EA`;
-
                 if (isCompleted) {
                     receiptStatus.innerText = '*** COMPLETED ***';
                     receiptStatus.className = 'text-[10px] tracking-widest font-bold text-red-600';
@@ -911,64 +673,37 @@
                 }
             }
 
-            const fillingsCount = burgerStack.filter(item => item.category === 'filling').length;
-            const fillingsNextBtn = document.getElementById('stage-2-next');
-
-            if (fillingsNextBtn) {
-                if (fillingsCount >= 3) {
-                    fillingsNextBtn.disabled = false;
-                    fillingsNextBtn.style.opacity = "1";
-                } else {
-                    fillingsNextBtn.disabled = true;
-                    fillingsNextBtn.style.opacity = "0.5";
-                }
-            }
-
+            // 3. CONTROLS
+            const fc = burgerStack.filter(x => x.category === 'filling').length;
+            const fn = document.getElementById('stage-2-next');
+            if (fn) { fn.disabled = fc < 3; fn.style.opacity = fc >= 3 ? '1' : '0.5'; }
             document.getElementById('global-undo').disabled = (burgerStack.length === 0 || isCompleted);
             document.getElementById('modify-btn').disabled = !isCompleted;
             document.getElementById('screenshot-btn').disabled = !isCompleted;
 
-            const step1 = document.getElementById('step-1');
-            const step2 = document.getElementById('step-2');
-            const step3 = document.getElementById('step-3');
-
-            step1.style.color = (currentStage === 1 ? "#962d27" : "#a8a29e");
-            step2.style.color = (currentStage === 2 ? "#962d27" : "#a8a29e");
-            step3.style.color = ((currentStage === 3 || currentStage === 4) ? "#962d27" : "#a8a29e");
-            
-            step1.style.borderBottom = "none";
-            step2.style.borderBottom = "none";
-            step3.style.borderBottom = "none";
+            const s1 = document.getElementById('step-1');
+            const s2 = document.getElementById('step-2');
+            const s3 = document.getElementById('step-3');
+            s1.style.color = currentStage === 1 ? '#962d27' : '#a8a29e';
+            s2.style.color = currentStage === 2 ? '#962d27' : '#a8a29e';
+            s3.style.color = (currentStage >= 3) ? '#962d27' : '#a8a29e';
+            s1.style.borderBottom = 'none';
+            s2.style.borderBottom = 'none';
+            s3.style.borderBottom = 'none';
         }
 
-        // ══════════════════════════════════════════════════
-        // FIX: Capture function with animation-class removal
-        // ══════════════════════════════════════════════════
+        // ── CAPTURE ──
         function captureAndSave() {
             if (!isCompleted) return;
-            initAudio();
-            playSound('click');
+            initAudio(); playSound('click');
 
             const captureTarget = document.getElementById('capture-target');
             const capBurger = document.getElementById('capture-burger-renderer');
-            
-            // 1. Clone burger stack into capture container
-            capBurger.innerHTML = document.getElementById('burger-renderer').innerHTML;
 
-            // 2. FIX: Strip animation classes & force visibility on all cloned SVGs
-            capBurger.querySelectorAll('.layer-drop').forEach(function(el) {
-                el.classList.remove('layer-drop');
-                el.style.opacity = '1';
-                el.style.transform = 'none';
-                el.style.animation = 'none';
-            });
-            // Also force all SVGs visible (belt-and-suspenders)
-            capBurger.querySelectorAll('svg').forEach(function(svg) {
-                svg.style.opacity = '1';
-                svg.style.transform = 'none';
-            });
+            // Render burger into capture container (no animation)
+            renderBurgerTo(capBurger, false);
 
-            // 3. Build receipt ticket
+            // Build receipt
             document.getElementById('capture-receipt-container').innerHTML = `
                 <div class="text-center">
                     <h4 class="text-sm font-bold tracking-tight uppercase text-[#962d27] font-mono">=== BUTTER DINER ===</h4>
@@ -979,58 +714,70 @@
                     ${document.getElementById('receipt-items-container').innerHTML}
                 </div>
                 <div class="border-t-2 border-dashed border-stone-300 pt-2 font-mono text-xs space-y-1" style="border-radius: 0px !important;">
-                    <div class="flex justify-between font-bold text-[#962d27]" style="font-weight: bold; border-radius: 0px !important;">
-                        <span style="font-weight: bold; border-radius: 0px !important;">TOTAL PRICE</span>
-                        <span style="font-weight: bold; border-radius: 0px !important;">${document.getElementById('receipt-total-price').innerText}</span>
+                    <div class="flex justify-between font-bold text-[#962d27]" style="font-weight:bold;border-radius:0px !important;">
+                        <span style="font-weight:bold;">TOTAL PRICE</span>
+                        <span style="font-weight:bold;">${document.getElementById('receipt-total-price').innerText}</span>
                     </div>
-                    <div class="flex justify-between text-[10px] text-stone-500" style="border-radius: 0px !important;">
-                        <span style="border-radius: 0px !important;">INGREDIENT COUNT</span>
-                        <span style="border-radius: 0px !important;">${document.getElementById('receipt-total-count').innerText}</span>
+                    <div class="flex justify-between text-[10px] text-stone-500" style="border-radius:0px !important;">
+                        <span>INGREDIENT COUNT</span>
+                        <span>${document.getElementById('receipt-total-count').innerText}</span>
                     </div>
-                    <div class="text-center pt-2 select-none" style="border-radius: 0px !important;">
-                        <div class="text-[10px] tracking-widest font-bold" style="border-radius: 0px !important; font-weight: bold;">*** ORDER COMPLETED ***</div>
-                        <div id="barcode-graphic" class="flex justify-center items-center h-8 mt-2 bg-transparent" style="border-radius: 0px !important;">
-                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[4px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[2px] h-6 bg-black mx-[2px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[5px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[3px] h-6 bg-black mx-[3px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[4px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
-                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius: 0px !important;"></div>
+                    <div class="text-center pt-2 select-none" style="border-radius:0px !important;">
+                        <div class="text-[10px] tracking-widest font-bold" style="border-radius:0px !important;font-weight:bold;">*** ORDER COMPLETED ***</div>
+                        <div class="flex justify-center items-center h-8 mt-2 bg-transparent" style="border-radius:0px !important;">
+                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
+                            <div class="w-[4px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
+                            <div class="w-[2px] h-6 bg-black mx-[2px]" style="border-radius:0px !important;"></div>
+                            <div class="w-[5px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
+                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
+                            <div class="w-[3px] h-6 bg-black mx-[3px]" style="border-radius:0px !important;"></div>
+                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
+                            <div class="w-[4px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
+                            <div class="w-[2px] h-6 bg-black mx-[1px]" style="border-radius:0px !important;"></div>
                         </div>
-                        <div class="text-[7px] text-stone-500 uppercase tracking-widest mt-1" style="border-radius: 0px !important;">BTR-500622-BGR</div>
+                        <div class="text-[7px] text-stone-500 uppercase tracking-widest mt-1" style="border-radius:0px !important;">BTR-500622-BGR</div>
                     </div>
-                </div>
-            `;
+                </div>`;
 
-            // 4. Show capture target, wait a frame for layout, then capture
             captureTarget.style.display = 'flex';
 
-            requestAnimationFrame(function() {
-                html2canvas(captureTarget, {
-                    backgroundColor: '#fcfaee',
-                    scale: 2,
-                    useCORS: true,
-                    logging: false
-                }).then(canvas => {
-                    const link = document.createElement('a');
-                    link.download = `butter-diner-burger-${Date.now()}.png`;
-                    link.href = canvas.toDataURL('image/png');
-                    link.click();
+            // Wait for images to load before capturing
+            const imgs = captureTarget.querySelectorAll('img');
+            let loaded = 0;
+            const total = imgs.length;
 
-                    captureTarget.style.display = 'none';
-                }).catch(err => {
-                    console.error("Capture failed:", err);
-                    captureTarget.style.display = 'none';
+            function doCapture() {
+                requestAnimationFrame(function() {
+                    html2canvas(captureTarget, {
+                        backgroundColor: '#fcfaee',
+                        scale: 2,
+                        useCORS: true,
+                        logging: false,
+                        allowTaint: false,
+                    }).then(canvas => {
+                        const link = document.createElement('a');
+                        link.download = `butter-diner-burger-${Date.now()}.png`;
+                        link.href = canvas.toDataURL('image/png');
+                        link.click();
+                        captureTarget.style.display = 'none';
+                    }).catch(err => {
+                        console.error("Capture failed:", err);
+                        captureTarget.style.display = 'none';
+                    });
                 });
+            }
+
+            if (total === 0) { doCapture(); return; }
+            imgs.forEach(img => {
+                if (img.complete) { loaded++; if (loaded === total) doCapture(); }
+                else {
+                    img.onload = () => { loaded++; if (loaded === total) doCapture(); };
+                    img.onerror = () => { loaded++; if (loaded === total) doCapture(); };
+                }
             });
         }
 
-        document.addEventListener('click', () => {
-            initAudio();
-        }, { once: true });
+        document.addEventListener('click', () => initAudio(), { once: true });
     </script>
 </body>
 </html>
