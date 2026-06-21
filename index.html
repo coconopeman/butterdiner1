@@ -481,10 +481,6 @@
 
         function updateGameLayout() {
             const renderer = document.getElementById('burger-renderer');
-            const receiptItems = document.getElementById('receipt-items-container');
-            const receiptTotal = document.getElementById('receipt-total-price');
-            const receiptCount = document.getElementById('receipt-total-count');
-            const receiptStatus = document.getElementById('receipt-status-stamp');
 
             // 1. BURGER
             if(burgerStack.length===0){
@@ -493,29 +489,7 @@
                 renderBurgerTo(renderer, true);
             }
 
-            // 2. RECEIPT — FIX #5: taller rows so text doesn't clip
-            if(burgerStack.length===0){
-                receiptItems.innerHTML = '<div style="display:block;width:100%;text-align:center;padding:48px 0;font-family:monospace;color:#a3a3a3;font-size:10px;border-bottom:1px dashed #e5e5e5;text-transform:uppercase;">NO ITEMS ORDERED</div>';
-                receiptTotal.innerText='0₩'; receiptCount.innerText='0 EA';
-                receiptStatus.innerText='*** ORDER OPEN ***';
-                receiptStatus.className='text-[10px] tracking-widest font-bold text-amber-600';
-            } else {
-                receiptItems.innerHTML='';
-                let total=0;
-                for(let i=burgerStack.length-1;i>=0;i--){
-                    const item=burgerStack[i]; total+=item.price;
-                    const row=document.createElement('div');
-                    row.style.cssText='display:flex;justify-content:space-between;align-items:center;width:100%;border-bottom:1px dotted #e5e5e5;padding:5px 0;min-height:24px;';
-                    row.innerHTML=`<span style="font-weight:bold;font-size:11px;color:#1c1311;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.name}</span><span style="font-family:monospace;font-size:11px;color:#1c1311;white-space:nowrap;padding-left:8px;">${item.price.toLocaleString()}₩</span>`;
-                    receiptItems.appendChild(row);
-                }
-                receiptTotal.innerText=`${total.toLocaleString()}₩`;
-                receiptCount.innerText=`${burgerStack.length} EA`;
-                if(isCompleted){receiptStatus.innerText='*** COMPLETED ***';receiptStatus.className='text-[10px] tracking-widest font-bold text-red-600';}
-                else{receiptStatus.innerText='*** ORDER OPEN ***';receiptStatus.className='text-[10px] tracking-widest font-bold text-amber-600';}
-            }
-
-            // 3. CONTROLS — explicit attribute toggle for reliable enable/disable
+            // 2. CONTROLS — explicit attribute toggle for reliable enable/disable
             const fc=burgerStack.filter(x=>x.category==='filling').length;
             const fn=document.getElementById('stage-2-next');
             if(fn){
@@ -544,11 +518,14 @@
                 }
             }
 
+            // 3. STEP INDICATOR COLORS
             const s1=document.getElementById('step-1'),s2=document.getElementById('step-2'),s3=document.getElementById('step-3');
-            s1.style.color=currentStage===1?'#962d27':'#a8a29e';
-            s2.style.color=currentStage===2?'#962d27':'#a8a29e';
-            s3.style.color=currentStage>=3?'#962d27':'#a8a29e';
-            s1.style.borderBottom='none';s2.style.borderBottom='none';s3.style.borderBottom='none';
+            if(s1) s1.style.color=currentStage===1?'#962d27':'#a8a29e';
+            if(s2) s2.style.color=currentStage===2?'#962d27':'#a8a29e';
+            if(s3) s3.style.color=currentStage>=3?'#962d27':'#a8a29e';
+            if(s1) s1.style.borderBottom='none';
+            if(s2) s2.style.borderBottom='none';
+            if(s3) s3.style.borderBottom='none';
         }
 
         // ── FIX #6: Capture with popup preview ──
