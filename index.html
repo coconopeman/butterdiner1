@@ -204,7 +204,7 @@
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">치즈A<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
                                 <button onclick="addFilling('cheese_b','치즈B')" class="bg-[#fff04a] text-[#1c1311] py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
-                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/zBfkZn8.png" class="menu-card-img" style="height:18px" crossorigin="anonymous"></div>
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/RdpUX5O.png" class="menu-card-img" style="height:18px" crossorigin="anonymous"></div>
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">치즈B<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
                             </div>
@@ -306,7 +306,7 @@
             chicken:'https://i.imgur.com/Nx9MEXN.png',
             meat:'https://i.imgur.com/URvIP1B.png',
             cheese_a:'https://i.imgur.com/pb9wwLH.png',
-            cheese_b:'https://i.imgur.com/zBfkZn8.png',
+            cheese_b:'https://i.imgur.com/RdpUX5O.png',
         };
 
         // Cheese IDs for rule checking
@@ -454,8 +454,8 @@
                 if(ri > 0){
                     const aboveLayer = burgerStack[stackIdx+1]; // item above in stack
                     if(aboveLayer && isCheese(aboveLayer.id)){
-                        // Item below cheese: 54px overlap
-                        wrapper.style.marginTop = '-54px';
+                        // Item below cheese: 30px overlap
+                        wrapper.style.marginTop = '-30px';
                     } else if(isCheese(layer.id)){
                         // FIX #1: Cheese itself moves 10px higher → -15px
                         wrapper.style.marginTop = '-15px';
@@ -515,13 +515,34 @@
                 else{receiptStatus.innerText='*** ORDER OPEN ***';receiptStatus.className='text-[10px] tracking-widest font-bold text-amber-600';}
             }
 
-            // 3. CONTROLS
+            // 3. CONTROLS — explicit attribute toggle for reliable enable/disable
             const fc=burgerStack.filter(x=>x.category==='filling').length;
             const fn=document.getElementById('stage-2-next');
-            if(fn){fn.disabled=fc<3;fn.style.opacity=fc>=3?'1':'0.5';}
+            if(fn){
+                if(fc>=3){
+                    fn.removeAttribute('disabled');
+                    fn.style.opacity='1';
+                    fn.style.cursor='pointer';
+                } else {
+                    fn.setAttribute('disabled','disabled');
+                    fn.style.opacity='0.5';
+                    fn.style.cursor='not-allowed';
+                }
+            }
 
-            // FIX #4: undo enabled whenever stack is not empty (regardless of completion)
-            document.getElementById('global-undo').disabled = (burgerStack.length===0);
+            // Undo: enabled whenever stack is not empty
+            const undoBtn=document.getElementById('global-undo');
+            if(undoBtn){
+                if(burgerStack.length>0){
+                    undoBtn.removeAttribute('disabled');
+                    undoBtn.style.opacity='1';
+                    undoBtn.style.cursor='pointer';
+                } else {
+                    undoBtn.setAttribute('disabled','disabled');
+                    undoBtn.style.opacity='0.4';
+                    undoBtn.style.cursor='not-allowed';
+                }
+            }
 
             const s1=document.getElementById('step-1'),s2=document.getElementById('step-2'),s3=document.getElementById('step-3');
             s1.style.color=currentStage===1?'#962d27':'#a8a29e';
