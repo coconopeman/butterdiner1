@@ -404,6 +404,7 @@
                     btn.onclick = function(){ 
                         if(side==='left') leftEyeColor=c.name; else rightEyeColor=c.name;
                         renderEyeSwatches();
+                        updateGameLayout();
                     };
                     container.appendChild(btn);
                 });
