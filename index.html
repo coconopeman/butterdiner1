@@ -636,8 +636,8 @@
                     (customerName ? '<div style="font-size:10px;color:#1c1311;font-family:monospace;font-weight:bold;margin-top:4px">NAME: ' + customerName + '</div>' : '') +
                     '<div style="font-size:9px;color:#999;font-family:monospace;padding-bottom:8px;margin-top:4px">DATE: ' + new Date().toISOString().slice(0,10) + '</div>' +
                 '</div>' +
-                '<div style="margin:12px 0;font-family:monospace;position:relative">' +
-                    '<img src="https://i.imgur.com/Ty8OEHX.png" crossorigin="anonymous" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.1;pointer-events:none;border-radius:0!important">' +
+                '<div style="margin:12px 0;font-family:monospace;position:relative;overflow:hidden">' +
+                    '<div style="position:absolute;top:0;left:0;right:0;bottom:0;background:url(https://i.imgur.com/Ty8OEHX.png) center center no-repeat;background-size:auto;opacity:0.1;pointer-events:none;border-radius:0!important"></div>' +
                     receiptRows +
                 '</div>' +
                 '<div style="font-family:monospace;font-size:11px;padding:4px 0 8px">' +
