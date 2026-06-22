@@ -404,7 +404,7 @@
                     btn.onclick = function(){ 
                         if(side==='left') leftEyeColor=c.name; else rightEyeColor=c.name;
                         renderEyeSwatches();
-                        updateGameLayout();
+                        updateEyeDotsOnly();
                     };
                     container.appendChild(btn);
                 });
@@ -412,6 +412,14 @@
         }
 
         function initAudio() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+
+        function updateEyeDotsOnly() {
+            const renderer = document.getElementById('burger-renderer');
+            const leftDot = renderer.querySelector('[data-eye="left"]');
+            const rightDot = renderer.querySelector('[data-eye="right"]');
+            if(leftDot) leftDot.style.background = getEyeHex(leftEyeColor);
+            if(rightDot) rightDot.style.background = getEyeHex(rightEyeColor);
+        }
         function playSound(type) {
             initAudio(); if (!audioCtx) return;
             const now = audioCtx.currentTime;
@@ -584,13 +592,14 @@
                     const imgBox = document.createElement('div');
                     imgBox.style.cssText = 'position:relative;width:260px;';
                     imgBox.appendChild(img);
-                    function addEyeDot(pos, hex) {
+                    function addEyeDot(pos, hex, side) {
                         const dot = document.createElement('div');
+                        dot.setAttribute('data-eye', side);
                         dot.style.cssText = 'position:absolute;left:'+pos.x+'px;top:'+pos.y+'px;width:'+pos.w+'px;height:'+pos.h+'px;background:'+hex+';border-radius:50%!important;pointer-events:none;';
                         imgBox.appendChild(dot);
                     }
-                    addEyeDot(ep.left, getEyeHex(leftEyeColor));
-                    addEyeDot(ep.right, getEyeHex(rightEyeColor));
+                    addEyeDot(ep.left, getEyeHex(leftEyeColor), 'left');
+                    addEyeDot(ep.right, getEyeHex(rightEyeColor), 'right');
                     wrapper.appendChild(imgBox);
                 } else {
                     wrapper.appendChild(img);
