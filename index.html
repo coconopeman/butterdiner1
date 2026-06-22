@@ -357,40 +357,42 @@
             fluffy_tail:'https://i.imgur.com/F1z2F7a.png',
         };
 
-        // ── Eye color system ──
-        let leftEyeColor = '검정';
-        let rightEyeColor = '검정';
-        let eyeStageActive = false;
-        const eyeColors = [
-            {name:'빨강',hex:'#E53E3E'},{name:'주황',hex:'#ED8936'},{name:'노랑',hex:'#ECC94B'},
-            {name:'초록',hex:'#48BB78'},{name:'파랑',hex:'#4299E1'},{name:'보라',hex:'#9F7AEA'},
-            {name:'분홍',hex:'#ED64A6'},{name:'검정',hex:'#1A1714'},{name:'하양',hex:'#FFFFFF'}
-        ];
+// ── Eye color system ──
+let leftEyeColor = '검정';
+let rightEyeColor = '검정';
+let eyeStageActive = false;
+const eyeColors = [
+    {name:'빨강',hex:'#E53E3E'},{name:'주황',hex:'#ED8936'},{name:'노랑',hex:'#ECC94B'},
+    {name:'초록',hex:'#48BB78'},{name:'파랑',hex:'#4299E1'},{name:'보라',hex:'#9F7AEA'},
+    {name:'분홍',hex:'#ED64A6'},{name:'검정',hex:'#1A1714'},{name:'하양',hex:'#FFFFFF'}
+];
 
-        function renderEyeSwatches() {
-            ['left','right'].forEach(side => {
-                const container = document.getElementById(side+'-eye-colors');
-                if(!container) return;
-                container.innerHTML = '';
-                const current = side==='left' ? leftEyeColor : rightEyeColor;
-                eyeColors.forEach(c => {
-                    const isActive = c.name === current;
-                    const isLight = ['노랑','하양','분홍'].includes(c.name);
-                    const textColor = isLight ? '#1c1311' : '#fff';
-                    const btn = document.createElement('button');
-                    btn.style.cssText = 'background:'+c.hex+';color:'+textColor+';padding:5px 0px;font-size:11px;font-weight:bold;border-radius:12px!important;transition:opacity 0.15s;cursor:pointer;text-align:center;border:' + (isActive ? '3px solid #962d27' : (isLight ? '2px solid #ccc' : '2px solid transparent')) + '!important;';
-                    btn.textContent = c.name;
-                    btn.onmouseover = function(){ this.style.opacity='0.85'; };
-                    btn.onmouseout = function(){ this.style.opacity='1'; };
-                    btn.onclick = function(){ 
-                        if(side==='left') leftEyeColor=c.name; else rightEyeColor=c.name;
-                        renderEyeSwatches();
-                    };
-                    container.appendChild(btn);
-                });
-            });
-        }
-
+function renderEyeSwatches() {
+    ['left','right'].forEach(side => {
+        const container = document.getElementById(side+'-eye-colors');
+        if(!container) return;
+        container.innerHTML = '';
+        const current = side==='left' ? leftEyeColor : rightEyeColor;
+        eyeColors.forEach(c => {
+            const isActive = c.name === current;
+            const isLight = ['노랑','하양','분홍'].includes(c.name);
+            const textColor = isLight ? '#1c1311' : '#fff';
+            const btn = document.createElement('button');
+            
+            // 부모 레이아웃의 강제 늘림을 막기 위해 width:40px;과 margin:0 auto;를 적용했습니다.
+            btn.style.cssText = 'background:'+c.hex+';color:'+textColor+';padding:6px 0px;font-size:11px;font-weight:bold;width:40px;margin:0 auto;border-radius:12px!important;transition:opacity 0.15s;cursor:pointer;text-align:center;border:' + (isActive ? '3px solid #962d27' : (isLight ? '2px solid #ccc' : '2px solid transparent')) + '!important;';
+            
+            btn.textContent = c.name;
+            btn.onmouseover = function(){ this.style.opacity='0.85'; };
+            btn.onmouseout = function(){ this.style.opacity='1'; };
+            btn.onclick = function(){ 
+                if(side==='left') leftEyeColor=c.name; else rightEyeColor=c.name;
+                renderEyeSwatches();
+            };
+            container.appendChild(btn);
+        });
+    });
+}
         // ── Audio ──
         function initAudio() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
         function playSound(type) {
