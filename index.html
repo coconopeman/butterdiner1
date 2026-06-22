@@ -362,9 +362,9 @@ let leftEyeColor = '검정';
 let rightEyeColor = '검정';
 let eyeStageActive = false;
 const eyeColors = [
-    {name:'빨강',hex:'#E53E3E'},{name:'주황',hex:'#ED8936'},{name:'노랑',hex:'#ffea2e'},
+    {name:'빨강',hex:'#E53E3E'},{name:'주황',hex:'#ffba42'},{name:'노랑',hex:'#ffea2e'},
     {name:'초록',hex:'#48BB78'},{name:'파랑',hex:'#4299E1'},{name:'보라',hex:'#9F7AEA'},
-    {name:'분홍',hex:'#ED64A6'},{name:'검정',hex:'#1A1714'},{name:'하양',hex:'#FFFFFF'}
+    {name:'분홍',hex:'#ff85d8'},{name:'검정',hex:'#1A1714'},{name:'하양',hex:'#FFFFFF'}
 ];
 
 function renderEyeSwatches() {
@@ -387,7 +387,7 @@ function renderEyeSwatches() {
             const btn = document.createElement('button');
             
             // margin: 0;으로 초기화하고 부모의 gap(4px)으로만 간격을 좁게 유지
-            btn.style.cssText = 'background:'+c.hex+';color:'+textColor+';padding:6px 0px;font-size:11px;font-weight:bold;width:40px;margin:0;box-sizing:border-box;border-radius:5px!important;transition:opacity 0.15s;cursor:pointer;text-align:center;border:' + (isActive ? '1.5px solid #962d27' : (isLight ? '1.5px solid #ccc' : '1.5px solid transparent')) + '!important;';
+            btn.style.cssText = 'background:'+c.hex+';color:'+textColor+';padding:7px 0px;font-size:12px;font-weight:bold;width:40px;margin:0;box-sizing:border-box;border-radius:5px!important;transition:opacity 0.15s;cursor:pointer;text-align:center;border:' + (isActive ? '1.5px solid #962d27' : (isLight ? '1.5px solid #ccc' : '1.5px solid transparent')) + '!important;';
             
             btn.textContent = c.name;
             btn.onmouseover = function(){ this.style.opacity='0.85'; };
