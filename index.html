@@ -100,7 +100,7 @@
                 <p class="text-xs font-mono tracking-widest text-[#4a6635] uppercase mt-0.5">Freshly Stacked Kitten-Themed Gourmet Burgers / Est. 1950</p>
             </div>
             <div>
-                <div class="diner-border px-4 py-2 bg-[#1c1311] text-[#fff04a] text-xs font-mono select-none tracking-widest rounded-xl">버터다이너 첫번째</div>
+                <div class="diner-border px-4 py-2 bg-[#1c1311] text-[#fff04a] text-xs font-mono select-none tracking-widest rounded-xl">버터다이너의 첫번째 요리.</div>
             </div>
         </div>
     </header>
@@ -117,7 +117,6 @@
                     <li>치즈는 연속으로 쌓을 수 없습니다.</li>
                     <li>치즈는 양상추 위에 쌓일 수 없습니다.</li>
                     <li>속재료는 최소 3개 이상 올라가야 합니다.</li>
-                    <li>헤드번을 올리면 조리가 마감되며 이미지 저장버튼이 활성화됩니다.</li>
                 </ul>
             </div>
             <div class="w-full flex-grow flex flex-col">
@@ -217,19 +216,19 @@
                             </div>
                             <div class="grid grid-cols-2 gap-2">
                                 <button onclick="selectTopBun('pointy_ears','뾰족귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
-                                    <div class="w-full h-12 flex justify-center items-center mb-1"><img src="https://i.imgur.com/8Rmt7k5.png" class="menu-card-img" style="height:48px" crossorigin="anonymous"></div>
+                                    <div class="w-full h-14 flex justify-center items-center mb-1 overflow-visible"><img src="https://i.imgur.com/8Rmt7k5.png" class="menu-card-img" style="height:52px" crossorigin="anonymous"></div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">뾰족귀</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
                                 <button onclick="selectTopBun('round_ears','둥근귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
-                                    <div class="w-full h-12 flex justify-center items-center mb-1"><img src="https://i.imgur.com/SLxtW2c.png" class="menu-card-img" style="height:48px" crossorigin="anonymous"></div>
+                                    <div class="w-full h-14 flex justify-center items-center mb-1 overflow-visible"><img src="https://i.imgur.com/SLxtW2c.png" class="menu-card-img" style="height:52px" crossorigin="anonymous"></div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">둥근귀</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
                                 <button onclick="selectTopBun('long_ears','길쭉귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
-                                    <div class="w-full h-12 flex justify-center items-center mb-1"><img src="https://i.imgur.com/iMA0xGj.png" class="menu-card-img" style="height:48px" crossorigin="anonymous"></div>
+                                    <div class="w-full h-14 flex justify-center items-center mb-1 overflow-visible"><img src="https://i.imgur.com/iMA0xGj.png" class="menu-card-img" style="height:52px" crossorigin="anonymous"></div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">길쭉귀</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
                                 <button onclick="selectTopBun('folded_ears','접힌귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors">
-                                    <div class="w-full h-12 flex justify-center items-center mb-1"><img src="https://i.imgur.com/pnJ2Hdf.png" class="menu-card-img" style="height:48px" crossorigin="anonymous"></div>
+                                    <div class="w-full h-14 flex justify-center items-center mb-1 overflow-visible"><img src="https://i.imgur.com/pnJ2Hdf.png" class="menu-card-img" style="height:52px" crossorigin="anonymous"></div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">접힌귀</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
                             </div>
@@ -238,10 +237,10 @@
                         <!-- STAGE 4 -->
                         <div id="stage-4-panel" class="stage-pane space-y-3 text-center py-4" style="display: none;">
                             <p class="text-2xl retro-heading text-[#962d27] uppercase tracking-wider">버터버거 주문서 작성 완료!</p>
-                            <p class="text-sm font-mono text-stone-600 leading-relaxed px-2">오본 플레이트의 완성된 햄버거가 영수증과 함께 주문서 이미지 카드로 저장될 준비를 마쳤습니다.</p>
-                            <div class="flex flex-col sm:flex-row gap-3 pt-4">
-                                <button id="modify-btn" onclick="modifyBurger()" class="flex-1 diner-border bg-[#edb12f] text-white font-bold p-3 transition-colors hover:opacity-90">수정하기</button>
-                                <button id="screenshot-btn" onclick="captureAndSave()" class="flex-1 diner-border bg-[#4a6635] text-white font-bold p-3 transition-colors hover:opacity-90">주문서 저장</button>
+                            <p class="text-sm font-mono text-stone-600 leading-relaxed px-2">주문서 저장을 누르시면 완성된 햄버거의 영수증이 다운로드 폴더에 저장됩니다.</p>
+                            <div class="flex flex-col gap-3 pt-4 px-2">
+                                <input id="customer-name" type="text" placeholder="영수증에 출력할 이름을 입력하세요" class="w-full border-2 border-[#962d27] bg-[#fcfaee] text-[#1c1311] text-sm font-mono px-3 py-2.5 text-center placeholder-stone-400 focus:outline-none" style="border-radius: 6px !important;">
+                                <button id="screenshot-btn" onclick="captureAndSave()" class="w-full diner-border bg-[#4a6635] text-white font-bold p-3 transition-colors hover:opacity-90">주문서 저장</button>
                             </div>
                         </div>
 
@@ -311,6 +310,14 @@
 
         // Cheese IDs for rule checking
         function isCheese(id) { return id === 'cheese_a' || id === 'cheese_b'; }
+
+        // Menu card images for under bun tails (used in receipt)
+        const menuBunImages = {
+            long_tail:'https://i.imgur.com/HBelkZR.png',
+            round_tail:'https://i.imgur.com/HSxLgXX.png',
+            chubby_tail:'https://i.imgur.com/I8UHHBa.png',
+            fluffy_tail:'https://i.imgur.com/F1z2F7a.png',
+        };
 
         // ── Audio ──
         function initAudio() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
@@ -457,10 +464,13 @@
                         // Item below cheese: 30px overlap
                         wrapper.style.marginTop = '-30px';
                     } else if(isCheese(layer.id)){
-                        // FIX #1: Cheese itself moves 10px higher → -15px
-                        wrapper.style.marginTop = '-15px';
+                        // Cheese: check if head bun is above → less overlap
+                        if(aboveLayer && aboveLayer.category === 'top'){
+                            wrapper.style.marginTop = '-5px';
+                        } else {
+                            wrapper.style.marginTop = '-15px';
+                        }
                     } else if(layer.category==='bottom'){
-                        // FIX #3: Underbun gets 3px extra overlap → -8px
                         wrapper.style.marginTop = '-8px';
                     } else {
                         wrapper.style.marginTop = '-5px';
@@ -528,55 +538,72 @@
             if(s3) s3.style.borderBottom='none';
         }
 
-        // ── FIX #6: Capture with popup preview ──
+        // ── Capture with popup preview ──
         function captureAndSave() {
             if(!isCompleted) return; initAudio(); playSound('click');
             const captureTarget = document.getElementById('capture-target');
             const capBurger = document.getElementById('capture-burger-renderer');
+            const customerName = (document.getElementById('customer-name').value || '').trim();
 
             renderBurgerTo(capBurger, false);
 
-            // FIX #5: Receipt rows use flex instead of float, matching the live receipt
+            // Build receipt rows with formatted names
             let receiptRows = '';
             let total = 0;
             for(let i=burgerStack.length-1;i>=0;i--){
                 const item=burgerStack[i]; total+=item.price;
-                receiptRows += `<div style="display:flex;justify-content:space-between;align-items:center;width:100%;border-bottom:1px dotted #e5e5e5;padding:5px 0;min-height:24px;">
-                    <span style="font-weight:bold;font-size:11px;color:#1c1311;">${item.name}</span>
-                    <span style="font-family:monospace;font-size:11px;color:#1c1311;">${item.price.toLocaleString()}₩</span>
-                </div>`;
+                let displayName = item.name;
+                let imgHtml = '';
+
+                if(item.category === 'top'){
+                    displayName = '헤드번 - ' + item.name;
+                } else if(item.category === 'bottom'){
+                    displayName = '언더번 - ' + item.name;
+                    const menuImg = menuBunImages[item.id];
+                    if(menuImg){
+                        imgHtml = '<img src="'+menuImg+'" crossorigin="anonymous" style="height:18px;width:auto;margin-right:6px;border-radius:0!important;">';
+                    }
+                }
+
+                receiptRows += '<div style="display:flex;justify-content:space-between;align-items:center;width:100%;padding:5px 0;min-height:26px;">' +
+                    '<span style="display:flex;align-items:center;font-weight:bold;font-size:11px;color:#1c1311;">' + imgHtml + displayName + '</span>' +
+                    '<span style="font-family:monospace;font-size:11px;color:#1c1311;white-space:nowrap;padding-left:8px;">' + item.price.toLocaleString() + '₩</span>' +
+                '</div>';
             }
 
-            document.getElementById('capture-receipt-container').innerHTML = `
-                <div style="text-align:center">
-                    <div style="font-weight:bold;font-size:13px;color:#962d27;font-family:monospace;letter-spacing:0.1em">=== BUTTER DINER ===</div>
-                    <div style="font-size:9px;color:#4a6635;font-family:monospace;letter-spacing:0.15em;text-transform:uppercase">Retro Fast Food System</div>
-                    <div style="font-size:9px;color:#999;font-family:monospace;border-bottom:1px dashed #ccc;padding-bottom:8px;margin-top:4px">DATE: ${new Date().toISOString().slice(0,10)} // TICKET #042</div>
-                </div>
-                <div style="margin:12px 0;font-family:monospace;">${receiptRows}</div>
-                <div style="border-top:2px dashed #ccc;padding-top:8px;font-family:monospace;font-size:12px">
-                    <div style="display:flex;justify-content:space-between;font-weight:bold;color:#962d27">
-                        <span>TOTAL</span><span>${total.toLocaleString()}₩</span>
-                    </div>
-                    <div style="display:flex;justify-content:space-between;font-size:10px;color:#999;margin-top:2px">
-                        <span>COUNT</span><span>${burgerStack.length} EA</span>
-                    </div>
-                    <div style="text-align:center;margin-top:14px">
-                        <div style="font-size:10px;font-weight:bold;letter-spacing:0.15em;color:#962d27">*** ORDER COMPLETED ***</div>
-                        <div style="margin-top:8px;display:flex;justify-content:center;align-items:center;height:24px">
-                            <span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 1px"></span>
-                            <span style="display:inline-block;width:4px;height:20px;background:#000;margin:0 1px"></span>
-                            <span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 2px"></span>
-                            <span style="display:inline-block;width:5px;height:20px;background:#000;margin:0 1px"></span>
-                            <span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 1px"></span>
-                            <span style="display:inline-block;width:3px;height:20px;background:#000;margin:0 3px"></span>
-                            <span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 1px"></span>
-                            <span style="display:inline-block;width:4px;height:20px;background:#000;margin:0 1px"></span>
-                            <span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 1px"></span>
-                        </div>
-                        <div style="font-size:7px;color:#999;letter-spacing:0.15em;margin-top:4px">BTR-500622-BGR</div>
-                    </div>
-                </div>`;
+            const barcodeCode = 'BTR-BGR-' + (customerName || 'GUEST');
+
+            document.getElementById('capture-receipt-container').innerHTML =
+                '<div style="text-align:center">' +
+                    '<div style="font-weight:900;font-size:15px;color:#962d27;font-family:monospace;letter-spacing:0.1em">=== BUTTER DINER ===</div>' +
+                    '<div style="font-size:9px;color:#4a6635;font-family:monospace;letter-spacing:0.15em;text-transform:uppercase">Retro Fast Food System</div>' +
+                    (customerName ? '<div style="font-size:10px;color:#1c1311;font-family:monospace;font-weight:bold;margin-top:4px">NAME: ' + customerName + '</div>' : '') +
+                    '<div style="font-size:9px;color:#999;font-family:monospace;padding-bottom:8px;margin-top:4px">DATE: ' + new Date().toISOString().slice(0,10) + ' // TICKET #042</div>' +
+                '</div>' +
+                '<div style="margin:12px 0;font-family:monospace;border-top:2px dashed #ccc;border-bottom:2px dashed #ccc;padding:8px 0;">' + receiptRows + '</div>' +
+                '<div style="padding-top:4px;font-family:monospace;font-size:12px">' +
+                    '<div style="display:flex;justify-content:space-between;font-weight:bold;color:#962d27">' +
+                        '<span>TOTAL</span><span>' + total.toLocaleString() + '₩</span>' +
+                    '</div>' +
+                    '<div style="display:flex;justify-content:space-between;font-size:10px;color:#999;margin-top:2px">' +
+                        '<span>COUNT</span><span>' + burgerStack.length + ' EA</span>' +
+                    '</div>' +
+                    '<div style="text-align:center;margin-top:14px">' +
+                        '<div style="font-size:10px;font-weight:bold;letter-spacing:0.15em;color:#962d27">*** ORDER COMPLETED ***</div>' +
+                        '<div style="margin-top:8px;display:flex;justify-content:center;align-items:center;height:24px">' +
+                            '<span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 1px;border-radius:0!important"></span>' +
+                            '<span style="display:inline-block;width:4px;height:20px;background:#000;margin:0 1px;border-radius:0!important"></span>' +
+                            '<span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 2px;border-radius:0!important"></span>' +
+                            '<span style="display:inline-block;width:5px;height:20px;background:#000;margin:0 1px;border-radius:0!important"></span>' +
+                            '<span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 1px;border-radius:0!important"></span>' +
+                            '<span style="display:inline-block;width:3px;height:20px;background:#000;margin:0 3px;border-radius:0!important"></span>' +
+                            '<span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 1px;border-radius:0!important"></span>' +
+                            '<span style="display:inline-block;width:4px;height:20px;background:#000;margin:0 1px;border-radius:0!important"></span>' +
+                            '<span style="display:inline-block;width:2px;height:20px;background:#000;margin:0 1px;border-radius:0!important"></span>' +
+                        '</div>' +
+                        '<div style="font-size:7px;color:#999;letter-spacing:0.15em;margin-top:4px;border-radius:0!important">' + barcodeCode + '</div>' +
+                    '</div>' +
+                '</div>';
 
             captureTarget.style.display = 'flex';
 
