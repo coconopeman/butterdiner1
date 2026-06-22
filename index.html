@@ -60,7 +60,7 @@
         #capture-target .layer-drop, #capture-target img {
             animation: none !important; opacity: 1 !important; transform: none !important;
         }
-        .menu-card-img { display: block; margin: 0 auto; object-fit: contain; }
+        .menu-card-img { display: block; margin: 0 auto; object-fit: contain; max-width: 100%; }
         .save-modal-overlay {
             display: none; position: fixed; inset: 0; z-index: 9999;
             background: rgba(28, 19, 17, 0.75); align-items: center; justify-content: center;
@@ -185,27 +185,27 @@
                         <div id="stage-2-panel" class="stage-pane space-y-3 opacity-50 pointer-events-none transition-opacity duration-300">
                             <div class="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
                                 <button onclick="addFilling('tomato','토마토')" class="bg-[#962d27] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
-                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/ddFlR8Z.png" class="menu-card-img" style="height:20px" crossorigin="anonymous"></div>
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/AKyf8qs.png" class="menu-card-img" style="height:20px" crossorigin="anonymous"></div>
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">토마토<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
                                 <button onclick="addFilling('lettuce','양상추')" class="bg-[#4a6635] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
-                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/ZFU2ml3.png" class="menu-card-img" style="height:20px" crossorigin="anonymous"></div>
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/EQDv5aM.png" class="menu-card-img" style="height:20px" crossorigin="anonymous"></div>
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">양상추<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
                                 <button onclick="addFilling('chicken','치킨')" class="bg-[#edb12f] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
-                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/gyht8uC.png" class="menu-card-img" style="height:24px" crossorigin="anonymous"></div>
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/Gm9Ya3B.png" class="menu-card-img" style="height:24px" crossorigin="anonymous"></div>
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">치킨<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
                                 <button onclick="addFilling('meat','고기')" class="bg-[#802f06] text-white py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
-                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/JTd0UDO.png" class="menu-card-img" style="height:24px" crossorigin="anonymous"></div>
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/3G1v2sm.png" class="menu-card-img" style="height:24px" crossorigin="anonymous"></div>
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">고기<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
                                 <button onclick="addFilling('cheese_a','치즈A')" class="bg-[#fff04a] text-[#1c1311] py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
-                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/pb9wwLH.png" class="menu-card-img" style="height:18px" crossorigin="anonymous"></div>
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/gPX6aPd.png" class="menu-card-img" style="height:18px" crossorigin="anonymous"></div>
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">치즈A<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
                                 <button onclick="addFilling('cheese_b','치즈B')" class="bg-[#fff04a] text-[#1c1311] py-2.5 px-1 text-xs font-bold rounded-xl transition-opacity hover:opacity-90 flex flex-col justify-between items-center min-h-[95px]">
-                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/8VVVUkR.png" class="menu-card-img" style="height:18px" crossorigin="anonymous"></div>
+                                    <div class="flex-grow flex items-center justify-center"><img src="https://i.imgur.com/EXaYT15.png" class="menu-card-img" style="height:18px" crossorigin="anonymous"></div>
                                     <div class="whitespace-nowrap text-center mt-1 w-full border-t border-dashed border-stone-400 pt-1" style="border-radius:0!important;font-size:11px;">치즈B<br><span class="font-mono text-[9px] opacity-80">1,000₩</span></div>
                                 </button>
                             </div>
@@ -219,19 +219,19 @@
                         <div id="stage-3-panel" class="stage-pane space-y-3 opacity-50 pointer-events-none transition-opacity duration-300">
                             <div class="grid grid-cols-2 gap-2">
                                 <button onclick="selectTopBun('pointy_ears','뾰족귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors overflow-visible">
-                                    <div class="w-full h-14 flex justify-center items-center mb-1 overflow-visible"><img src="https://i.imgur.com/8Rmt7k5.png" class="menu-card-img" style="height:52px;border-radius:0!important" crossorigin="anonymous"></div>
+                                    <div class="w-full h-14 flex justify-center items-center mb-1 overflow-visible"><img src="https://i.imgur.com/1Ock0Ji.png" class="menu-card-img" style="height:52px;border-radius:0!important" crossorigin="anonymous"></div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">뾰족귀</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
                                 <button onclick="selectTopBun('round_ears','둥근귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors overflow-visible">
-                                    <div class="w-full h-14 flex justify-center items-center mb-1 overflow-visible"><img src="https://i.imgur.com/SLxtW2c.png" class="menu-card-img" style="height:52px;border-radius:0!important" crossorigin="anonymous"></div>
+                                    <div class="w-full h-14 flex justify-center items-center mb-1 overflow-visible"><img src="https://i.imgur.com/y44034R.png" class="menu-card-img" style="height:52px;border-radius:0!important" crossorigin="anonymous"></div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">둥근귀</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
                                 <button onclick="selectTopBun('long_ears','길쭉귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors overflow-visible">
-                                    <div class="w-full h-14 flex justify-center items-center mb-1 overflow-visible"><img src="https://i.imgur.com/iMA0xGj.png" class="menu-card-img" style="height:52px;border-radius:0!important" crossorigin="anonymous"></div>
+                                    <div class="w-full h-14 flex justify-center items-center mb-1 overflow-visible"><img src="https://i.imgur.com/0n77g9y.png" class="menu-card-img" style="height:52px;border-radius:0!important" crossorigin="anonymous"></div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">길쭉귀</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
                                 <button onclick="selectTopBun('folded_ears','접힌귀')" class="bg-white hover:bg-stone-100 p-2.5 text-xs font-bold tracking-wide text-left flex flex-col justify-between items-center rounded-xl transition-colors overflow-visible">
-                                    <div class="w-full h-14 flex justify-center items-center mb-1 overflow-visible"><img src="https://i.imgur.com/pnJ2Hdf.png" class="menu-card-img" style="height:52px;border-radius:0!important" crossorigin="anonymous"></div>
+                                    <div class="w-full h-14 flex justify-center items-center mb-1 overflow-visible"><img src="https://i.imgur.com/LvKjB2L.png" class="menu-card-img" style="height:52px;border-radius:0!important" crossorigin="anonymous"></div>
                                     <div class="flex justify-between w-full border-t border-dashed border-stone-200 pt-1" style="border-radius:0!important;"><span class="text-[#1c1311]">접힌귀</span><span class="font-mono text-xs text-stone-500">3,000₩</span></div>
                                 </button>
                             </div>
@@ -330,20 +330,20 @@
         };
 
         const burgerImages = {
-            long_tail:'https://i.imgur.com/euwLrjq.png',
-            round_tail:'https://i.imgur.com/euwLrjq.png',
-            chubby_tail:'https://i.imgur.com/euwLrjq.png',
-            fluffy_tail:'https://i.imgur.com/euwLrjq.png',
-            pointy_ears:'https://i.imgur.com/8Rmt7k5.png',
-            round_ears:'https://i.imgur.com/SLxtW2c.png',
-            long_ears:'https://i.imgur.com/iMA0xGj.png',
-            folded_ears:'https://i.imgur.com/pnJ2Hdf.png',
-            tomato:'https://i.imgur.com/ddFlR8Z.png',
-            lettuce:'https://i.imgur.com/ZFU2ml3.png',
-            chicken:'https://i.imgur.com/gyht8uC.png',
-            meat:'https://i.imgur.com/JTd0UDO.png',
-            cheese_a:'https://i.imgur.com/pb9wwLH.png',
-            cheese_b:'https://i.imgur.com/8VVVUkR.png',
+            long_tail:'https://i.imgur.com/U3cHsz5.png',
+            round_tail:'https://i.imgur.com/U3cHsz5.png',
+            chubby_tail:'https://i.imgur.com/U3cHsz5.png',
+            fluffy_tail:'https://i.imgur.com/U3cHsz5.png',
+            pointy_ears:'https://i.imgur.com/1Ock0Ji.png',
+            round_ears:'https://i.imgur.com/y44034R.png',
+            long_ears:'https://i.imgur.com/0n77g9y.png',
+            folded_ears:'https://i.imgur.com/LvKjB2L.png',
+            tomato:'https://i.imgur.com/AKyf8qs.png',
+            lettuce:'https://i.imgur.com/EQDv5aM.png',
+            chicken:'https://i.imgur.com/Gm9Ya3B.png',
+            meat:'https://i.imgur.com/3G1v2sm.png',
+            cheese_a:'https://i.imgur.com/gPX6aPd.png',
+            cheese_b:'https://i.imgur.com/EXaYT15.png',
         };
 
         function isCheese(id) { return id === 'cheese_a' || id === 'cheese_b'; }
