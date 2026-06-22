@@ -100,7 +100,7 @@
                 <p class="text-xs font-mono tracking-widest text-[#4a6635] uppercase mt-0.5">Freshly Stacked animal-themed butter Burgers / Est. 2026</p>
             </div>
             <div>
-                <button onclick="document.getElementById('welcome-overlay').classList.add('show');document.getElementById('welcome-step-1').style.display='';document.getElementById('welcome-step-2').style.display='none'" class="diner-border px-4 py-2 bg-[#1c1311] text-[#fff04a] text-xs font-mono tracking-widest rounded-xl cursor-pointer hover:bg-[#2a2320] transition-colors">안내 다시보기</button>
+                <button onclick="document.getElementById('welcome-overlay').classList.add('show');document.getElementById('welcome-step-1').style.display='flex';document.getElementById('welcome-step-2').style.display='none'" class="diner-border px-4 py-2 bg-[#1c1311] text-[#fff04a] text-xs font-mono tracking-widest rounded-xl cursor-pointer hover:bg-[#2a2320] transition-colors">안내 다시보기</button>
             </div>
         </div>
     </header>
@@ -121,7 +121,7 @@
             </div>
             <div class="w-full flex-grow flex flex-col">
                 <div class="w-full h-full bg-[#fcfaf2] diner-border rounded-xl p-6 flex flex-col justify-center items-center relative select-none overflow-hidden" style="border: 2px solid #962d27 !important;">
-                    <div id="burger-renderer" class="flex flex-col items-center justify-end w-full h-[300px] relative z-10 overflow-y-auto no-scrollbar">
+                    <div id="burger-renderer" class="flex flex-col items-center justify-end w-full h-[300px] relative z-10 overflow-visible no-scrollbar" style="padding-top:20px">
                         <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-stone-400">
                             <span class="text-xs tracking-widest font-mono uppercase font-bold text-stone-500 mb-2">PLATE IS EMPTY</span>
                             <span class="text-[10px] font-mono leading-relaxed text-stone-400">STAGE 1에서 언더번을 선택하시면 조리 및 영수증 출력이 시작됩니다.</span>
@@ -235,20 +235,21 @@
                         </div>
 
                         <!-- STAGE EYE: Eye Color Selection -->
-                        <div id="stage-eye-panel" class="stage-pane space-y-3" style="display:none">
-                            <div class="border-b border-stone-100 pb-1.5" style="border-radius:0!important;">
+                        <div id="stage-eye-panel" class="stage-pane space-y-4" style="display:none">
+                            <div class="border-b border-stone-100 pb-1.5 flex items-center gap-2" style="border-radius:0!important;">
                                 <span class="bg-[#edb12f]/30 text-[#962d27] font-mono text-xs px-2 py-0.5 rounded-md font-bold uppercase tracking-widest">eyes</span>
+                                <span class="text-[10px] text-stone-400 font-mono">화면에서 우리가 바라보는기준의 색상.</span>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-stone-700 mb-2">왼쪽 눈</p>
+                                <p class="text-sm font-bold text-stone-700 mb-2 retro-heading" style="font-size:15px">왼쪽 눈</p>
                                 <div class="flex flex-wrap gap-1.5" id="left-eye-colors"></div>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-stone-700 mb-2">오른쪽 눈</p>
+                                <p class="text-sm font-bold text-stone-700 mb-2 retro-heading" style="font-size:15px">오른쪽 눈</p>
                                 <div class="flex flex-wrap gap-1.5" id="right-eye-colors"></div>
                             </div>
-                            <p class="text-[10px] text-stone-400 leading-relaxed mt-2">하단에 이미지 상에선 바뀌지 않지만, 만약 버터버거의 실물을 주문하신다면 고른 색상으로 눈이 칠해져요.</p>
-                            <button onclick="completeOrder()" class="w-full bg-[#962d27] text-white font-bold p-3 transition-colors hover:opacity-90 retro-heading" style="font-size:16px;border:2px solid #962d27!important">주문 완료</button>
+                            <p class="text-xs text-stone-500 leading-relaxed mt-1" style="font-size:11px;line-height:1.8">이미지 상에선 바뀌지 않지만,<br>만약 버터버거의 실물을 주문하신다면 고른 색상으로 눈이 칠해져요.</p>
+                            <button onclick="completeOrder()" class="w-full bg-[#962d27] text-white font-bold p-3.5 transition-colors hover:opacity-90 retro-heading" style="font-size:22px;border:2px solid #962d27!important">주문 완료</button>
                         </div>
 
                         <!-- STAGE 4 -->
@@ -278,7 +279,7 @@
             <h2 class="text-3xl retro-heading text-[#962d27] uppercase tracking-wider" style="font-family:'Black Han Sans',sans-serif!important;">BUTTER DINER RECEIPT</h2>
         </div>
         <div class="w-full flex gap-6 items-stretch">
-            <div class="w-[320px] bg-white diner-border p-4 flex flex-col justify-end items-center" style="border-radius:0!important;border:2px solid #962d27!important;">
+            <div class="w-[320px] diner-border p-4 flex flex-col justify-end items-center" style="border-radius:0!important;border:2px solid #962d27!important;background:url('https://i.imgur.com/AYoNL9h.png') center/cover no-repeat;">
                 <div id="capture-burger-renderer" class="flex flex-col items-center justify-end w-full h-[360px]"></div>
             </div>
             <div id="capture-receipt-container" class="flex-1 bg-white p-5 receipt-tear flex flex-col text-[#1c1311]" style="border-radius:0!important;border:2px solid #962d27!important;"></div>
@@ -373,10 +374,11 @@
                 container.innerHTML = '';
                 const current = side==='left' ? leftEyeColor : rightEyeColor;
                 eyeColors.forEach(c => {
+                    const isActive = c.name === current;
+                    const isLight = ['노랑','하양','핑크'].includes(c.name);
                     const btn = document.createElement('button');
-                    btn.style.cssText = 'width:28px;height:28px;border-radius:6px!important;border:2px solid '+(c.name===current?'#962d27':'#ccc')+'!important;background:'+c.hex+';cursor:pointer;transition:border-color 0.15s;';
-                    if(c.name==='하양') btn.style.border = '2px solid '+(c.name===current?'#962d27':'#aaa')+'!important';
-                    btn.title = c.name;
+                    btn.style.cssText = 'display:flex;flex-direction:column;align-items:center;justify-content:center;width:50px;height:42px;border-radius:6px!important;border:2px solid '+(isActive?'#962d27':'#d4d0c8')+'!important;background:'+(isActive?'#fef9c3':'#fff')+';cursor:pointer;transition:all 0.15s;padding:2px;';
+                    btn.innerHTML = '<span style="display:block;width:22px;height:22px;border-radius:50%!important;background:'+c.hex+';border:1.5px solid '+(isLight?'#bbb':'transparent')+';margin-bottom:2px"></span><span style="font-size:8px;font-family:monospace;color:#4a4540;font-weight:bold;line-height:1">'+c.name+'</span>';
                     btn.onclick = function(){ 
                         if(side==='left') leftEyeColor=c.name; else rightEyeColor=c.name;
                         renderEyeSwatches();
@@ -557,8 +559,8 @@
                 if(ri > 0){
                     const aboveLayer = burgerStack[stackIdx+1]; // item above in stack
                     if(aboveLayer && isCheese(aboveLayer.id)){
-                        // Item below cheese: 30px overlap
-                        wrapper.style.marginTop = '-30px';
+                        // Item below cheese: 18px overlap
+                        wrapper.style.marginTop = '-18px';
                     } else if(isCheese(layer.id)){
                         // Cheese: check if head bun is above → less overlap
                         if(aboveLayer && aboveLayer.category === 'top'){
@@ -646,6 +648,9 @@
             // Build receipt rows with formatted names
             let receiptRows = '';
             let total = 0;
+            function getEyeHex(name) { const c = eyeColors.find(x=>x.name===name); return c ? c.hex : '#1A1714'; }
+            const isLightEye = n => ['노랑','하양','핑크'].includes(n);
+
             for(let i=burgerStack.length-1;i>=0;i--){
                 const item=burgerStack[i]; total+=item.price;
                 let displayName = item.name;
@@ -653,6 +658,11 @@
 
                 if(item.category === 'top'){
                     displayName = '헤드번 - ' + item.name;
+                    // Insert eye color row BEFORE head bun
+                    receiptRows += '<div style="display:flex;justify-content:center;align-items:center;gap:14px;width:100%;padding:6px 0;border-bottom:1px dotted #ccc;border-radius:0!important;font-family:monospace;font-size:10px;color:#666">' +
+                        '<span style="display:flex;align-items:center;gap:4px">L <span style="display:inline-block;width:14px;height:14px;background:'+getEyeHex(leftEyeColor)+';border:1.5px solid '+(isLightEye(leftEyeColor)?'#aaa':'transparent')+';border-radius:50%!important"></span></span>' +
+                        '<span style="display:flex;align-items:center;gap:4px">R <span style="display:inline-block;width:14px;height:14px;background:'+getEyeHex(rightEyeColor)+';border:1.5px solid '+(isLightEye(rightEyeColor)?'#aaa':'transparent')+';border-radius:50%!important"></span></span>' +
+                    '</div>';
                 } else if(item.category === 'bottom'){
                     displayName = '언더번 - ' + item.name;
                     const menuImg = menuBunImages[item.id];
@@ -667,9 +677,6 @@
                 '</div>';
             }
 
-            // Get eye color hex for display
-            function getEyeHex(name) { const c = eyeColors.find(x=>x.name===name); return c ? c.hex : '#1A1714'; }
-
             document.getElementById('capture-receipt-container').innerHTML =
                 '<div style="text-align:center">' +
                     '<div style="font-weight:900;font-size:15px;color:#962d27;font-family:monospace;letter-spacing:0.1em">=== BUTTER DINER ===</div>' +
@@ -677,10 +684,6 @@
                     '<div style="font-size:9px;color:#999;font-family:monospace;padding-bottom:8px;margin-top:4px">DATE: ' + new Date().toISOString().slice(0,10) + '</div>' +
                 '</div>' +
                 '<div style="margin:12px 0;font-family:monospace;">' + receiptRows + '</div>' +
-                '<div style="display:flex;gap:12px;justify-content:center;padding:6px 0 10px;font-family:monospace;font-size:10px;color:#4a4540;border-radius:0!important">' +
-                    '<span style="display:flex;align-items:center;gap:4px">LEFT EYE <span style="display:inline-block;width:12px;height:12px;background:'+getEyeHex(leftEyeColor)+';border:1px solid #999;border-radius:50%!important"></span> '+leftEyeColor+'</span>' +
-                    '<span style="display:flex;align-items:center;gap:4px">RIGHT EYE <span style="display:inline-block;width:12px;height:12px;background:'+getEyeHex(rightEyeColor)+';border:1px solid #999;border-radius:50%!important"></span> '+rightEyeColor+'</span>' +
-                '</div>' +
                 '<div style="border-top:2px dashed #ccc;padding-top:8px;font-family:monospace;font-size:12px;border-radius:0!important">' +
                     '<div style="display:flex;justify-content:space-between;font-weight:bold;color:#962d27">' +
                         '<span>TOTAL</span><span>' + total.toLocaleString() + '₩</span>' +
