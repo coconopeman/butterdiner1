@@ -97,10 +97,10 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
             <div>
                 <h1 class="text-4xl md:text-5xl uppercase font-bold tracking-tight text-[#962d27] retro-heading">BUTTER DINER . 1</h1>
-                <p class="text-xs font-mono tracking-widest text-[#4a6635] uppercase mt-0.5">Freshly Stacked Kitten-Themed Gourmet Burgers / Est. 1950</p>
+                <p class="text-xs font-mono tracking-widest text-[#4a6635] uppercase mt-0.5">Freshly Stacked animal-themed butter Burgers / Est. 2026</p>
             </div>
             <div>
-                <div class="diner-border px-4 py-2 bg-[#1c1311] text-[#fff04a] text-xs font-mono select-none tracking-widest rounded-xl">버터다이너의 첫번째 요리.</div>
+                <div class="diner-border px-4 py-2 bg-[#1c1311] text-[#fff04a] text-xs font-mono select-none tracking-widest rounded-xl">버터다이너 그 첫번째</div>
             </div>
         </div>
     </header>
@@ -108,7 +108,7 @@
     <main class="max-w-7xl mx-auto p-4 md:p-6 w-full flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         <!-- LEFT COLUMN -->
-        <section class="lg:col-span-6 flex flex-col gap-5">
+        <section class="lg:col-span-6 flex flex-col gap-3">
             <div class="bg-[#fef9c3] p-5 relative overflow-hidden" style="border: 2px solid #962d27 !important;">
                 <h3 class="text-3xl retro-heading text-[#962d27] border-b border-dashed border-[#962d27] pb-2 mb-3" style="border-radius: 0px !important;">버터버거 조리 수칙</h3>
                 <ul class="text-xs font-sans font-medium space-y-2 text-stone-800 leading-relaxed list-disc list-inside">
@@ -121,7 +121,7 @@
             </div>
             <div class="w-full flex-grow flex flex-col">
                 <div class="w-full h-full bg-[#fcfaf2] diner-border rounded-xl p-6 flex flex-col justify-center items-center relative select-none overflow-hidden" style="border: 2px solid #962d27 !important;">
-                    <div id="burger-renderer" class="flex flex-col items-center justify-end w-full h-[360px] relative z-10 overflow-y-auto no-scrollbar">
+                    <div id="burger-renderer" class="flex flex-col items-center justify-end w-full h-[300px] relative z-10 overflow-y-auto no-scrollbar">
                         <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-stone-400">
                             <span class="text-xs tracking-widest font-mono uppercase font-bold text-stone-500 mb-2">PLATE IS EMPTY</span>
                             <span class="text-[10px] font-mono leading-relaxed text-stone-400">STAGE 1에서 언더번을 선택하시면 조리 및 영수증 출력이 시작됩니다.</span>
@@ -132,7 +132,7 @@
         </section>
 
         <!-- RIGHT COLUMN -->
-        <section class="lg:col-span-6 flex flex-col gap-5">
+        <section class="lg:col-span-6 flex flex-col gap-2">
             <div class="bg-white diner-border rounded-xl p-3.5 flex justify-between text-base select-none" style="border-color: #962d27 !important;">
                 <span id="step-1" class="text-[#962d27] pb-1 retro-heading" style="font-size: 28px !important;">1. 언더번 선택</span>
                 <span id="step-2" class="text-stone-400 pb-1 retro-heading" style="font-size: 28px !important;">2. 속재료 선택</span>
@@ -274,6 +274,26 @@
             <h3>주문서 저장 완료!</h3>
             <img id="save-preview-img" class="preview-img" src="" alt="저장된 주문서">
             <button class="confirm-btn" onclick="closeSaveModal()">확인</button>
+        </div>
+    </div>
+
+    <!-- WELCOME POPUP -->
+    <div id="welcome-overlay" class="save-modal-overlay show">
+        <div class="save-modal" onclick="event.stopPropagation()" style="max-width:460px">
+            <!-- Step 1 -->
+            <div id="welcome-step-1">
+                <h3 style="font-size:24px;margin-bottom:4px">버터다이너에 오신걸 환영합니다!</h3>
+                <p style="font-family:'Share Tech Mono',monospace;font-size:13px;color:#4a4540;line-height:1.8;text-align:center;margin:12px 0 20px">여기선 버터버거의 주문서를 만들 수 있습니다.</p>
+                <button class="confirm-btn" onclick="document.getElementById('welcome-step-1').style.display='none';document.getElementById('welcome-step-2').style.display='flex';">다음</button>
+            </div>
+            <!-- Step 2 -->
+            <div id="welcome-step-2" style="display:none;flex-direction:column;align-items:center;gap:14px">
+                <p style="font-family:'Share Tech Mono',monospace;font-size:12px;color:#4a4540;line-height:1.8;text-align:center">그리고 주문서대로의 버거를,<br>실제로 만나보실 수도 있게 준비중입니다!</p>
+                <img src="https://i.imgur.com/zuFMNlA.png" crossorigin="anonymous" style="width:80%;max-width:320px;border:2px solid #962d27;border-radius:8px!important">
+                <p style="font-family:'Share Tech Mono',monospace;font-size:11px;color:#6b6560;line-height:1.8;text-align:center">완성된 영수증의 버거는 간단한 리터칭이 가능합니다.<br>다만 리터칭된 모습은 피규어로 뽑힐 수 없습니다.</p>
+                <p style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#962d27;text-align:center;margin-top:4px">그럼 버터버거를 즐겨주세요!</p>
+                <button class="confirm-btn" onclick="document.getElementById('welcome-overlay').classList.remove('show')">확인</button>
+            </div>
         </div>
     </div>
 
@@ -565,7 +585,7 @@
                     }
                 }
 
-                receiptRows += '<div style="display:flex;justify-content:space-between;align-items:center;width:100%;border-bottom:1px dotted #ccc;padding:5px 0;min-height:26px;">' +
+                receiptRows += '<div style="display:flex;justify-content:space-between;align-items:center;width:100%;border-bottom:1px dotted #ccc;padding:5px 0;min-height:26px;border-radius:0!important">' +
                     '<span style="display:flex;align-items:center;font-weight:bold;font-size:11px;color:#1c1311;">' + displayName + imgHtml + '</span>' +
                     '<span style="font-family:monospace;font-size:11px;color:#1c1311;white-space:nowrap;padding-left:8px;">' + item.price.toLocaleString() + '₩</span>' +
                 '</div>';
@@ -578,7 +598,7 @@
                     '<div style="font-size:9px;color:#999;font-family:monospace;padding-bottom:8px;margin-top:4px">DATE: ' + new Date().toISOString().slice(0,10) + '</div>' +
                 '</div>' +
                 '<div style="margin:12px 0;font-family:monospace;">' + receiptRows + '</div>' +
-                '<div style="border-top:2px dashed #ccc;padding-top:8px;font-family:monospace;font-size:12px">' +
+                '<div style="border-top:2px dashed #ccc;padding-top:8px;font-family:monospace;font-size:12px;border-radius:0!important">' +
                     '<div style="display:flex;justify-content:space-between;font-weight:bold;color:#962d27">' +
                         '<span>TOTAL</span><span>' + total.toLocaleString() + '₩</span>' +
                     '</div>' +
@@ -642,8 +662,9 @@
         }
 
         function closeSaveModal(e) {
-            if(e && e.target !== document.getElementById('save-modal-overlay')) return;
-            document.getElementById('save-modal-overlay').classList.remove('show');
+            if(!e || e.target === document.getElementById('save-modal-overlay')){
+                document.getElementById('save-modal-overlay').classList.remove('show');
+            }
         }
 
         document.addEventListener('click',()=>initAudio(),{once:true});
