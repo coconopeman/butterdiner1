@@ -378,7 +378,7 @@
                     const isLight = ['노랑','하양','핑크'].includes(c.name);
                     const textColor = isLight ? '#1c1311' : '#fff';
                     const btn = document.createElement('button');
-                    btn.style.cssText = 'background:'+c.hex+';color:'+textColor+';padding:8px 2px;font-size:11px;font-weight:bold;border-radius:12px!important;transition:opacity 0.15s;cursor:pointer;text-align:center;border:' + (isActive ? '3px solid #962d27' : (isLight ? '2px solid #ccc' : '2px solid transparent')) + '!important;';
+                    btn.style.cssText = 'background:'+c.hex+';color:'+textColor+';padding:5px 2px;font-size:11px;font-weight:bold;border-radius:12px!important;transition:opacity 0.15s;cursor:pointer;text-align:center;border:' + (isActive ? '3px solid #962d27' : (isLight ? '2px solid #ccc' : '2px solid transparent')) + '!important;';
                     btn.textContent = c.name;
                     btn.onmouseover = function(){ this.style.opacity='0.85'; };
                     btn.onmouseout = function(){ this.style.opacity='1'; };
