@@ -61,8 +61,6 @@
             animation: none !important; opacity: 1 !important; transform: none !important;
         }
         .menu-card-img { display: block; margin: 0 auto; object-fit: contain; }
-
-        /* ── Save Popup Modal ── */
         .save-modal-overlay {
             display: none; position: fixed; inset: 0; z-index: 9999;
             background: rgba(28, 19, 17, 0.75); align-items: center; justify-content: center;
@@ -121,12 +119,22 @@
             </div>
             <div class="w-full flex-grow flex flex-col">
                 <div class="w-full h-full bg-[#fcfaf2] diner-border rounded-xl p-6 flex flex-col justify-center items-center relative select-none overflow-hidden" style="border: 2px solid #962d27 !important;">
-                    <div id="burger-renderer" class="flex flex-col items-center justify-end w-full h-[300px] relative z-10 overflow-visible no-scrollbar" style="padding-top:20px">
+                    <div id="burger-renderer" class="flex flex-col items-center justify-end w-full h-[220px] relative z-10 overflow-visible no-scrollbar" style="padding-top:20px">
                         <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-stone-400">
                             <span class="text-xs tracking-widest font-mono uppercase font-bold text-stone-500 mb-2">PLATE IS EMPTY</span>
                             <span class="text-[10px] font-mono leading-relaxed text-stone-400">STAGE 1에서 언더번을 선택하시면 조리 및 영수증 출력이 시작됩니다.</span>
                         </div>
                     </div>
+                </div>
+            </div>
+            <!-- NEW: Promo Box -->
+            <div class="bg-[#fef9c3] p-5 relative overflow-hidden" style="border: 2px solid #962d27 !important;">
+                <p class="text-xs font-sans font-medium text-stone-800 leading-relaxed text-center">
+                    레디메이드 3D출력 피규어 홍보를 위한 미니게임입니다!<br>
+                    자세한 사항은 트위터 <span class="font-bold text-[#962d27]">@butter3D0622</span> 계정에서 확인할 수 있습니다.
+                </p>
+                <div class="flex justify-center mt-3">
+                    <button onclick="window.open('https://x.com/butter3D0622','_blank')" class="diner-border bg-[#962d27] text-[#fcfaee] text-xs font-bold px-5 py-2 rounded-lg cursor-pointer hover:opacity-90 transition-opacity">확인할래요!</button>
                 </div>
             </div>
         </section>
@@ -175,7 +183,7 @@
                             </div>
                         </div>
 
-                        <!-- STAGE 2: Fillings (6 buttons: tomato, lettuce, chicken, meat, cheeseA, cheeseB) -->
+                        <!-- STAGE 2 -->
                         <div id="stage-2-panel" class="stage-pane space-y-3 opacity-50 pointer-events-none transition-opacity duration-300">
                             <div class="flex justify-between items-center border-b border-stone-100 pb-1.5" style="border-radius:0!important;">
                                 <span class="bg-[#edb12f]/30 text-[#962d27] font-mono text-xs px-2 py-0.5 rounded-md font-bold uppercase tracking-widest">inside</span>
@@ -234,7 +242,7 @@
                             </div>
                         </div>
 
-                        <!-- STAGE EYE: Eye Color Selection -->
+                        <!-- STAGE EYE -->
                         <div id="stage-eye-panel" class="stage-pane space-y-4" style="display:none">
                             <div class="border-b border-stone-100 pb-1.5 flex items-center gap-2 flex-wrap" style="border-radius:0!important;">
                                 <span class="bg-[#edb12f]/30 text-[#962d27] font-mono text-xs px-2 py-0.5 rounded-md font-bold uppercase tracking-widest">eyes</span>
@@ -298,13 +306,11 @@
     <!-- WELCOME POPUP -->
     <div id="welcome-overlay" class="save-modal-overlay show">
         <div class="save-modal" onclick="event.stopPropagation()" style="max-width:460px">
-            <!-- Step 1 -->
             <div id="welcome-step-1" style="display:flex;flex-direction:column;align-items:center;gap:10px">
                 <h3 style="font-size:28px;margin-bottom:0">버터다이너에 오신걸 환영합니다!</h3>
                 <p style="font-family:'Share Tech Mono',monospace;font-size:13px;color:#4a4540;line-height:1.9;text-align:center;margin:8px 0 4px">이곳에선 버터버거의 주문서를 만드는<br>간단한 미니게임을 즐길 수 있습니다.<br><br>조리수칙을 지켜 버거를 만들어보세요.</p>
                 <button class="confirm-btn" onclick="document.getElementById('welcome-step-1').style.display='none';document.getElementById('welcome-step-2').style.display='flex';" style="margin-top:8px">다음</button>
             </div>
-            <!-- Step 2 -->
             <div id="welcome-step-2" style="display:none;flex-direction:column;align-items:center;gap:14px">
                 <p style="font-family:'Share Tech Mono',monospace;font-size:12px;color:#4a4540;line-height:1.8;text-align:center">그리고 주문서대로의 버거를,<br>실제로 만나보실 수도 있게 준비중입니다!</p>
                 <img src="https://i.imgur.com/zuFMNlA.png" crossorigin="anonymous" style="width:80%;max-width:320px;border:2px solid #962d27;border-radius:8px!important">
@@ -346,10 +352,8 @@
             cheese_b:'https://i.imgur.com/8VVVUkR.png',
         };
 
-        // Cheese IDs for rule checking
         function isCheese(id) { return id === 'cheese_a' || id === 'cheese_b'; }
 
-        // Menu card images for under bun tails (used in receipt)
         const menuBunImages = {
             long_tail:'https://i.imgur.com/HBelkZR.png',
             round_tail:'https://i.imgur.com/HSxLgXX.png',
@@ -357,50 +361,40 @@
             fluffy_tail:'https://i.imgur.com/F1z2F7a.png',
         };
 
-// ── Eye color system ──
-let leftEyeColor = '검정';
-let rightEyeColor = '검정';
-let eyeStageActive = false;
-const eyeColors = [
-    {name:'빨강',hex:'#E53E3E'},{name:'주황',hex:'#ffba42'},{name:'노랑',hex:'#ffea2e'},
-    {name:'초록',hex:'#48BB78'},{name:'파랑',hex:'#4299E1'},{name:'보라',hex:'#9F7AEA'},
-    {name:'분홍',hex:'#ff85d8'},{name:'검정',hex:'#1A1714'},{name:'하양',hex:'#FFFFFF'}
-];
+        let leftEyeColor = '검정';
+        let rightEyeColor = '검정';
+        let eyeStageActive = false;
+        const eyeColors = [
+            {name:'빨강',hex:'#E53E3E'},{name:'주황',hex:'#ffba42'},{name:'노랑',hex:'#ffea2e'},
+            {name:'초록',hex:'#48BB78'},{name:'파랑',hex:'#4299E1'},{name:'보라',hex:'#9F7AEA'},
+            {name:'분홍',hex:'#ff85d8'},{name:'검정',hex:'#1A1714'},{name:'하양',hex:'#FFFFFF'}
+        ];
 
-function renderEyeSwatches() {
-    ['left','right'].forEach(side => {
-        const container = document.getElementById(side+'-eye-colors');
-        if(!container) return;
-        container.innerHTML = '';
-        
-        // 외부 CSS 간섭을 막기 위해 부모 컨테이너의 정렬과 간격(gap)을 직접 강제 적용
-        container.style.display = 'flex';
-        container.style.flexWrap = 'wrap';
-        container.style.gap = '4px'; // 이 값을 조절하여 버튼 사이의 간격을 자유롭게 줄일 수 있습니다
-        container.style.justifyContent = 'flex-start'; // 왼쪽부터 차례대로 정렬
+        function renderEyeSwatches() {
+            ['left','right'].forEach(side => {
+                const container = document.getElementById(side+'-eye-colors');
+                if(!container) return;
+                container.innerHTML = '';
+                container.style.cssText = 'display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-start;';
+                const current = side==='left' ? leftEyeColor : rightEyeColor;
+                eyeColors.forEach(c => {
+                    const isActive = c.name === current;
+                    const isLight = ['노랑','하양','분홍'].includes(c.name);
+                    const textColor = isLight ? '#1c1311' : '#fff';
+                    const btn = document.createElement('button');
+                    btn.style.cssText = 'background:'+c.hex+';color:'+textColor+';padding:7px 0px;font-size:12px;font-weight:bold;width:40px;margin:0;box-sizing:border-box;border-radius:5px!important;transition:opacity 0.15s;cursor:pointer;text-align:center;border:' + (isActive ? '1.5px solid #962d27' : (isLight ? '1.5px solid #ccc' : '1.5px solid transparent')) + '!important;';
+                    btn.textContent = c.name;
+                    btn.onmouseover = function(){ this.style.opacity='0.85'; };
+                    btn.onmouseout = function(){ this.style.opacity='1'; };
+                    btn.onclick = function(){ 
+                        if(side==='left') leftEyeColor=c.name; else rightEyeColor=c.name;
+                        renderEyeSwatches();
+                    };
+                    container.appendChild(btn);
+                });
+            });
+        }
 
-        const current = side==='left' ? leftEyeColor : rightEyeColor;
-        eyeColors.forEach(c => {
-            const isActive = c.name === current;
-            const isLight = ['노랑','하양','분홍'].includes(c.name);
-            const textColor = isLight ? '#1c1311' : '#fff';
-            const btn = document.createElement('button');
-            
-            // margin: 0;으로 초기화하고 부모의 gap(4px)으로만 간격을 좁게 유지
-            btn.style.cssText = 'background:'+c.hex+';color:'+textColor+';padding:7px 0px;font-size:12px;font-weight:bold;width:40px;margin:0;box-sizing:border-box;border-radius:5px!important;transition:opacity 0.15s;cursor:pointer;text-align:center;border:' + (isActive ? '1.5px solid #962d27' : (isLight ? '1.5px solid #ccc' : '1.5px solid transparent')) + '!important;';
-            
-            btn.textContent = c.name;
-            btn.onmouseover = function(){ this.style.opacity='0.85'; };
-            btn.onmouseout = function(){ this.style.opacity='1'; };
-            btn.onclick = function(){ 
-                if(side==='left') leftEyeColor=c.name; else rightEyeColor=c.name;
-                renderEyeSwatches();
-            };
-            container.appendChild(btn);
-        });
-    });
-}
-        // ── Audio ──
         function initAudio() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
         function playSound(type) {
             initAudio(); if (!audioCtx) return;
@@ -476,12 +470,10 @@ function renderEyeSwatches() {
             if(burgerStack.length===0){showAlert("언더번이 준비되지 않았습니다!");return;}
             playSound('add');
             burgerStack.push({id,name,category:'top',price:pricing[id]});
-            // Show eye color selection instead of completing
             eyeStageActive = true;
             leftEyeColor = '검정'; rightEyeColor = '검정';
             ['stage-1-panel','stage-2-panel','stage-3-panel'].forEach(pid=>{
-                const el=document.getElementById(pid);
-                el.classList.add('opacity-50','pointer-events-none');
+                document.getElementById(pid).classList.add('opacity-50','pointer-events-none');
             });
             document.getElementById('stage-eye-panel').style.display='block';
             document.getElementById('stage-4-panel').style.display='none';
@@ -497,12 +489,9 @@ function renderEyeSwatches() {
             setStage(4);
         }
 
-        // ── FIX #4: Undo always works like Ctrl+Z ──
         function undoLastStep() {
             if(burgerStack.length===0) return;
             initAudio(); hideAlert(); playSound('click');
-
-            // If in eye color stage, remove head bun and go back
             if(eyeStageActive) {
                 eyeStageActive = false;
                 document.getElementById('stage-eye-panel').style.display='none';
@@ -510,13 +499,8 @@ function renderEyeSwatches() {
                 setStage(3);
                 return;
             }
-
-            // If completed, uncomplete first
             if(isCompleted) isCompleted = false;
-
             burgerStack.pop();
-
-            // Determine correct stage after undo
             if(burgerStack.length===0){
                 document.getElementById('stage-1-next').classList.add('hidden');
                 setStage(1);
@@ -548,33 +532,22 @@ function renderEyeSwatches() {
             isCompleted=false; setStage(2);
         }
 
-        // ══════════════════════════════════════════
-        // Render burger with image overlap rules
-        // ══════════════════════════════════════════
         function renderBurgerTo(container, animate) {
             container.innerHTML = '';
             if(burgerStack.length===0) return false;
-
-            // Render top-to-bottom (last array item = top of burger → rendered first)
             for(let ri=0; ri<burgerStack.length; ri++){
                 const stackIdx = burgerStack.length - 1 - ri;
                 const layer = burgerStack[stackIdx];
                 const wrapper = document.createElement('div');
                 wrapper.style.cssText = 'position:relative;display:flex;align-items:center;justify-content:center;width:100%;';
-
-                // ── Z-INDEX: underbun=100, cheese=90, others=position-based ──
                 if(layer.category==='bottom') wrapper.style.zIndex=100;
                 else if(isCheese(layer.id)) wrapper.style.zIndex=90;
                 else wrapper.style.zIndex = 10+ri;
-
-                // ── OVERLAP MARGINS ──
                 if(ri > 0){
-                    const aboveLayer = burgerStack[stackIdx+1]; // item above in stack
+                    const aboveLayer = burgerStack[stackIdx+1];
                     if(aboveLayer && isCheese(aboveLayer.id)){
-                        // Item below cheese: 30px overlap (cheese bottom, this is fine)
                         wrapper.style.marginTop = '-30px';
                     } else if(isCheese(layer.id)){
-                        // Cheese top overlap with item above: reduced
                         if(aboveLayer && aboveLayer.category === 'top'){
                             wrapper.style.marginTop = '-5px';
                         } else {
@@ -586,7 +559,6 @@ function renderEyeSwatches() {
                         wrapper.style.marginTop = '-5px';
                     }
                 }
-
                 const img = document.createElement('img');
                 img.src = burgerImages[layer.id];
                 img.style.cssText = 'width:260px;height:auto;display:block;';
@@ -601,44 +573,22 @@ function renderEyeSwatches() {
 
         function updateGameLayout() {
             const renderer = document.getElementById('burger-renderer');
-
-            // 1. BURGER
             if(burgerStack.length===0){
                 renderer.innerHTML = '<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 text-stone-400"><span class="text-xs tracking-widest font-mono uppercase font-bold text-stone-500 mb-2">PLATE IS EMPTY</span><span class="text-[10px] font-mono leading-relaxed text-stone-400">STAGE 1에서 언더번을 선택하시면 조리 및 영수증 출력이 시작됩니다.</span></div>';
             } else {
                 renderBurgerTo(renderer, true);
             }
-
-            // 2. CONTROLS — explicit attribute toggle for reliable enable/disable
             const fc=burgerStack.filter(x=>x.category==='filling').length;
             const fn=document.getElementById('stage-2-next');
             if(fn){
-                if(fc>=3){
-                    fn.removeAttribute('disabled');
-                    fn.style.opacity='1';
-                    fn.style.cursor='pointer';
-                } else {
-                    fn.setAttribute('disabled','disabled');
-                    fn.style.opacity='0.5';
-                    fn.style.cursor='not-allowed';
-                }
+                if(fc>=3){ fn.removeAttribute('disabled'); fn.style.opacity='1'; fn.style.cursor='pointer'; }
+                else { fn.setAttribute('disabled','disabled'); fn.style.opacity='0.5'; fn.style.cursor='not-allowed'; }
             }
-
-            // Undo: enabled whenever stack is not empty
             const undoBtn=document.getElementById('global-undo');
             if(undoBtn){
-                if(burgerStack.length>0){
-                    undoBtn.removeAttribute('disabled');
-                    undoBtn.style.opacity='1';
-                    undoBtn.style.cursor='pointer';
-                } else {
-                    undoBtn.setAttribute('disabled','disabled');
-                    undoBtn.style.opacity='0.4';
-                    undoBtn.style.cursor='not-allowed';
-                }
+                if(burgerStack.length>0){ undoBtn.removeAttribute('disabled'); undoBtn.style.opacity='1'; undoBtn.style.cursor='pointer'; }
+                else { undoBtn.setAttribute('disabled','disabled'); undoBtn.style.opacity='0.4'; undoBtn.style.cursor='not-allowed'; }
             }
-
-            // 3. STEP INDICATOR COLORS
             const s1=document.getElementById('step-1'),s2=document.getElementById('step-2'),s3=document.getElementById('step-3');
             if(s1) s1.style.color=currentStage===1?'#962d27':'#a8a29e';
             if(s2) s2.style.color=currentStage===2?'#962d27':'#a8a29e';
@@ -648,16 +598,13 @@ function renderEyeSwatches() {
             if(s3) s3.style.borderBottom='none';
         }
 
-        // ── Capture with popup preview ──
         function captureAndSave() {
             if(!isCompleted) return; initAudio(); playSound('click');
             const captureTarget = document.getElementById('capture-target');
             const capBurger = document.getElementById('capture-burger-renderer');
             const customerName = (document.getElementById('customer-name').value || '').trim();
-
             renderBurgerTo(capBurger, false);
 
-            // Build receipt rows with formatted names
             let receiptRows = '';
             let total = 0;
             function getEyeHex(name) { const c = eyeColors.find(x=>x.name===name); return c ? c.hex : '#1A1714'; }
@@ -667,10 +614,8 @@ function renderEyeSwatches() {
                 const item=burgerStack[i]; total+=item.price;
                 let displayName = item.name;
                 let imgHtml = '';
-
                 if(item.category === 'top'){
                     displayName = '헤드번 - ' + item.name;
-                    // Insert eye color row BEFORE head bun
                     receiptRows += '<div style="display:flex;justify-content:center;align-items:center;gap:14px;width:100%;padding:6px 0;border-bottom:1px dotted #ccc;border-radius:0!important;font-family:monospace;font-size:10px;color:#666">' +
                         '<span style="display:flex;align-items:center;gap:4px">L <span style="display:inline-block;width:14px;height:14px;background:'+getEyeHex(leftEyeColor)+';border:1.5px solid '+(isLightEye(leftEyeColor)?'#aaa':'transparent')+';border-radius:50%!important"></span></span>' +
                         '<span style="display:flex;align-items:center;gap:4px">R <span style="display:inline-block;width:14px;height:14px;background:'+getEyeHex(rightEyeColor)+';border:1.5px solid '+(isLightEye(rightEyeColor)?'#aaa':'transparent')+';border-radius:50%!important"></span></span>' +
@@ -678,11 +623,8 @@ function renderEyeSwatches() {
                 } else if(item.category === 'bottom'){
                     displayName = '언더번 - ' + item.name;
                     const menuImg = menuBunImages[item.id];
-                    if(menuImg){
-                        imgHtml = '<img src="'+menuImg+'" crossorigin="anonymous" style="height:18px;width:auto;margin-left:6px;border-radius:0!important;">';
-                    }
+                    if(menuImg) imgHtml = '<img src="'+menuImg+'" crossorigin="anonymous" style="height:18px;width:auto;margin-left:6px;border-radius:0!important;">';
                 }
-
                 receiptRows += '<div style="display:flex;justify-content:space-between;align-items:center;width:100%;border-bottom:1px dotted #ccc;padding:5px 0;min-height:26px;border-radius:0!important">' +
                     '<span style="display:flex;align-items:center;font-weight:bold;font-size:11px;color:#1c1311;">' + displayName + imgHtml + '</span>' +
                     '<span style="font-family:monospace;font-size:11px;color:#1c1311;white-space:nowrap;padding-left:8px;">' + item.price.toLocaleString() + '₩</span>' +
@@ -697,12 +639,8 @@ function renderEyeSwatches() {
                 '</div>' +
                 '<div style="margin:12px 0;font-family:monospace;">' + receiptRows + '</div>' +
                 '<div style="border-top:2px dashed #ccc;padding-top:8px;font-family:monospace;font-size:12px;border-radius:0!important">' +
-                    '<div style="display:flex;justify-content:space-between;font-weight:bold;color:#962d27">' +
-                        '<span>TOTAL</span><span>' + total.toLocaleString() + '₩</span>' +
-                    '</div>' +
-                    '<div style="display:flex;justify-content:space-between;font-size:10px;color:#999;margin-top:2px">' +
-                        '<span>COUNT</span><span>' + burgerStack.length + ' EA</span>' +
-                    '</div>' +
+                    '<div style="display:flex;justify-content:space-between;font-weight:bold;color:#962d27"><span>TOTAL</span><span>' + total.toLocaleString() + '₩</span></div>' +
+                    '<div style="display:flex;justify-content:space-between;font-size:10px;color:#999;margin-top:2px"><span>COUNT</span><span>' + burgerStack.length + ' EA</span></div>' +
                     '<div style="text-align:center;margin-top:14px">' +
                         '<div style="font-size:10px;font-weight:bold;letter-spacing:0.15em;color:#962d27">*** ORDER COMPLETED ***</div>' +
                         '<div style="margin-top:8px;display:flex;justify-content:center;align-items:center;height:24px">' +
@@ -721,25 +659,18 @@ function renderEyeSwatches() {
                 '</div>';
 
             captureTarget.style.display = 'flex';
-
             const imgs = captureTarget.querySelectorAll('img');
             let loaded = 0; const imgTotal = imgs.length;
-
             function doCapture() {
                 requestAnimationFrame(function(){
                     html2canvas(captureTarget,{backgroundColor:'#fcfaee',scale:2,useCORS:true,logging:false,allowTaint:false})
                     .then(canvas => {
                         const dataUrl = canvas.toDataURL('image/png');
-
-                        // Download file
                         const link = document.createElement('a');
-                        link.download = `butter-diner-burger-${Date.now()}.png`;
+                        link.download = 'butter-diner-burger-'+Date.now()+'.png';
                         link.href = dataUrl;
                         link.click();
-
                         captureTarget.style.display = 'none';
-
-                        // FIX #6: Show popup with preview
                         document.getElementById('save-preview-img').src = dataUrl;
                         document.getElementById('save-modal-overlay').classList.add('show');
                     }).catch(err => {
@@ -748,7 +679,6 @@ function renderEyeSwatches() {
                     });
                 });
             }
-
             if(imgTotal===0){doCapture();return;}
             imgs.forEach(img=>{
                 if(img.complete){loaded++;if(loaded===imgTotal)doCapture();}
