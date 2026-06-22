@@ -364,7 +364,7 @@
         const eyeColors = [
             {name:'빨강',hex:'#E53E3E'},{name:'주황',hex:'#ED8936'},{name:'노랑',hex:'#ECC94B'},
             {name:'초록',hex:'#48BB78'},{name:'파랑',hex:'#4299E1'},{name:'보라',hex:'#9F7AEA'},
-            {name:'핑크',hex:'#ED64A6'},{name:'검정',hex:'#1A1714'},{name:'하양',hex:'#FFFFFF'}
+            {name:'분홍',hex:'#ED64A6'},{name:'검정',hex:'#1A1714'},{name:'하양',hex:'#FFFFFF'}
         ];
 
         function renderEyeSwatches() {
@@ -375,10 +375,10 @@
                 const current = side==='left' ? leftEyeColor : rightEyeColor;
                 eyeColors.forEach(c => {
                     const isActive = c.name === current;
-                    const isLight = ['노랑','하양','핑크'].includes(c.name);
+                    const isLight = ['노랑','하양','분홍'].includes(c.name);
                     const textColor = isLight ? '#1c1311' : '#fff';
                     const btn = document.createElement('button');
-                    btn.style.cssText = 'background:'+c.hex+';color:'+textColor+';padding:5px 2px;font-size:11px;font-weight:bold;border-radius:12px!important;transition:opacity 0.15s;cursor:pointer;text-align:center;border:' + (isActive ? '3px solid #962d27' : (isLight ? '2px solid #ccc' : '2px solid transparent')) + '!important;';
+                    btn.style.cssText = 'background:'+c.hex+';color:'+textColor+';padding:5px 0px;font-size:11px;font-weight:bold;border-radius:12px!important;transition:opacity 0.15s;cursor:pointer;text-align:center;border:' + (isActive ? '3px solid #962d27' : (isLight ? '2px solid #ccc' : '2px solid transparent')) + '!important;';
                     btn.textContent = c.name;
                     btn.onmouseover = function(){ this.style.opacity='0.85'; };
                     btn.onmouseout = function(){ this.style.opacity='1'; };
@@ -652,7 +652,7 @@
             let receiptRows = '';
             let total = 0;
             function getEyeHex(name) { const c = eyeColors.find(x=>x.name===name); return c ? c.hex : '#1A1714'; }
-            const isLightEye = n => ['노랑','하양','핑크'].includes(n);
+            const isLightEye = n => ['노랑','하양','분홍'].includes(n);
 
             for(let i=burgerStack.length-1;i>=0;i--){
                 const item=burgerStack[i]; total+=item.price;
